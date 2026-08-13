@@ -1,0 +1,15 @@
+---
+# Huawei S-Series on VRP V600 branch (V600R022/V600R024) — e.g. S8700-4 core,
+# S5735-*-V2 access units. Starts as a copy of huawei_vrp_s.yml (V200 branch).
+# TODO: validate against a real V600 dev/test unit and diverge here if the
+# CLI differs (AAA, SNMP, and syslog keywords are the most likely to shift
+# between VRP major branches). See docs/firmware-notes.md.
+- name: "[Huawei S] Configure SNMP agent"
+  community.network.ce_config:
+    lines:
+      - "snmp-agent"
+      - "snmp-agent community read {{ vault_snmp_community_ro }}"
+      - "snmp-agent community write {{ vault_snmp_community_rw }}"
+      - "snmp-agent trap enable"
+      - "snmp-agent target-host trap address udp-domain {{ vault_snmp_trap_host }} udp-port 162 params securityname {{ vault_snmp_community_ro }}"
+    match: line

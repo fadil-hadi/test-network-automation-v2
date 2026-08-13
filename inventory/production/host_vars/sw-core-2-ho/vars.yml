@@ -1,0 +1,26 @@
+---
+# host_vars for: sw-core-2-ho
+# Hardware : 6405v2
+# Role     : aruba_ho_core
+# Notes    : Switch - Core #2 HO
+# ─────────────────────────────────────────────────────────
+# Device-specific variables for this Aruba AOS-CX switch.
+# Add IP interfaces, SVIs, VLANs specific to this device only.
+# Changes here affect ONLY this device when playbooks run.
+
+# Example VLAN interfaces (SVIs) — fill in actual values
+# vlan_interfaces:
+#   - vlan_id: 10
+#     ip: "FILL_IP"
+#     prefix_length: 24
+#     description: "MGMT VLAN"
+#   - vlan_id: 20
+#     ip: "FILL_IP"
+#     prefix_length: 24
+#     description: "SERVER VLAN"
+
+# Example static routes specific to this device
+# static_routes:
+#   - destination: "0.0.0.0/0"
+#     nexthop: "FILL_GW_IP"
+#     description: "Default route"

@@ -1,0 +1,29 @@
+---
+# ============================================================
+# Global variables — shared across ALL in-scope devices
+# Sensitive values are in vault.yml (Ansible Vault encrypted)
+# ============================================================
+
+# Syslog — FIF Elastic endpoint (confirm IP with FIF network team)
+syslog_server: "FILL_FIF_ELASTIC_IP"
+syslog_port: 514
+syslog_facility: "local7"
+syslog_severity: "informational"
+
+# NTP servers (confirm with FIF)
+ntp_primary: "FILL_NTP_PRIMARY_IP"
+ntp_secondary: "FILL_NTP_SECONDARY_IP"
+ntp_timezone: "Asia/Jakarta"
+
+# SSH settings
+ssh_version: 2
+ssh_timeout: 300
+
+# SNMP
+snmp_version: "v2c"
+snmp_trap_version: "v2c"
+
+# Credentials (reference vault variables — never put plaintext here)
+ansible_user: "{{ vault_local_username }}"
+ansible_password: "{{ vault_local_password }}"
+ansible_become: false

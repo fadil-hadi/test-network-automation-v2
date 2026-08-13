@@ -1,0 +1,8 @@
+---
+- name: "[Huawei CE] Configure syslog destination"
+  community.network.ce_config:
+    lines:
+      - "info-center loghost {{ syslog_server }} facility {{ syslog_facility }}"
+      - "info-center loghost source all"
+      - "info-center timestamp disable"   # avoids superfluous Oxidized diffs — see SoW 3.2
+    match: line

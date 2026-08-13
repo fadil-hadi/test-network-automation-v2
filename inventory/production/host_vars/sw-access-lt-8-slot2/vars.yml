@@ -1,0 +1,12 @@
+---
+# host_vars for: sw-access-lt-8-slot2
+# Hardware : S5731-S48P4X
+# Role     : huawei_ho_access
+# Notes    : SW-ACCESS-LT-8 SLOT#2
+# ─────────────────────────────────────────────────────────
+# Add device-specific variables here only if needed.
+# Most config for this device tier is managed via group_vars.
+
+# Example: override SNMP location for this specific device
+# snmp_location: "FILL_RACK_LOCATION"
+# snmp_contact: "FIF Network Team"

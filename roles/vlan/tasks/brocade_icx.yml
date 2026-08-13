@@ -1,0 +1,6 @@
+---
+- name: "[Brocade ICX] Create VLAN"
+  community.network.icx_vlan:
+    vlan_id: "{{ vlan_id }}"
+    name: "{{ vlan_name }}"
+    state: present

@@ -1,0 +1,24 @@
+---
+- name: "[Cumulus Linux] Configure net-snmp community and trap sink"
+  ansible.builtin.lineinfile:
+    path: /etc/snmp/snmpd.conf
+    create: true
+    regexp: "^rocommunity"
+    line: "rocommunity {{ vault_snmp_community_ro }} default"
+    mode: "0644"
+  become: true
+
+- name: "[Cumulus Linux] Configure trap destination"
+  ansible.builtin.lineinfile:
+    path: /etc/snmp/snmptrapd.conf
+    create: true
+    line: "traphandle default {{ vault_snmp_trap_host }}"
+    mode: "0644"
+  become: true
+
+- name: "[Cumulus Linux] Restart snmpd"
+  ansible.builtin.systemd:
+    name: snmpd
+    state: restarted
+    enabled: true
+  become: true

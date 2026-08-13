@@ -1,0 +1,7 @@
+---
+- name: "[Cumulus Linux] Ensure sshd is enabled and running"
+  ansible.builtin.systemd:
+    name: ssh
+    enabled: true
+    state: started
+  become: true

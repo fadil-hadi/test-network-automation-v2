@@ -1,0 +1,10 @@
+---
+- name: "[Brocade ICX] Disable Telnet server"
+  community.network.icx_config:
+    lines:
+      - "no telnet server"
+
+- name: "[Brocade ICX] Disable HTTP server"
+  community.network.icx_config:
+    lines:
+      - "no ip http server"

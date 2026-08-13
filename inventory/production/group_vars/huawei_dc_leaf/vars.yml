@@ -1,0 +1,7 @@
+---
+# DC/DRC Leaf Switches — Huawei CE-Series
+ansible_network_os: community.network.ce
+ansible_connection: network_cli
+device_series: "huawei_vrp_ce"
+device_location: "DC/DRC"
+device_role: "leaf"

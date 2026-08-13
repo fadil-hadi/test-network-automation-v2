@@ -1,0 +1,6 @@
+---
+- name: "[Aruba AOS-CX] Configure syslog destination"
+  arubanetworks.aoscx.aoscx_config:
+    lines:
+      - "logging host {{ syslog_server }} transport udp port {{ syslog_port }}"
+      - "logging severity {{ syslog_severity }}"

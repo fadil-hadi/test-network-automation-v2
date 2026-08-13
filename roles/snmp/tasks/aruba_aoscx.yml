@@ -1,0 +1,6 @@
+---
+- name: "[Aruba AOS-CX] Configure SNMP"
+  arubanetworks.aoscx.aoscx_config:
+    lines:
+      - "snmp-server community {{ vault_snmp_community_ro }} ro"
+      - "snmp-server host {{ vault_snmp_trap_host }} trap version 2c {{ vault_snmp_community_ro }}"

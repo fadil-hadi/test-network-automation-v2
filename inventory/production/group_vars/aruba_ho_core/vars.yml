@@ -1,0 +1,8 @@
+---
+# HO Core Switches — Aruba 6405v2 AOS-CX
+# PUSH LAST — most critical devices in scope
+ansible_network_os: arubanetworks.aoscx.aoscx
+ansible_connection: arubanetworks.aoscx.aoscx
+device_series: "aruba_aoscx"
+device_location: "HO"
+device_role: "core"

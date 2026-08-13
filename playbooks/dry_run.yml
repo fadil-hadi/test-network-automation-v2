@@ -1,0 +1,8 @@
+---
+# ============================================================
+# Dry run playbook — syntax check only, no changes applied
+# Run this BEFORE any production push
+# Usage: ansible-playbook playbooks/dry_run.yml --syntax-check
+# Or in Semaphore: create a separate job template for this
+# ============================================================
+- import_playbook: site.yml

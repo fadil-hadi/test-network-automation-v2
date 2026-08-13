@@ -1,0 +1,125 @@
+---
+# ============================================================
+# Master playbook — runs all roles in correct push order
+# Use this for full fleet push via Semaphore
+# PUSH ORDER: ho_access → ho_mgmt → ho_serverfarm →
+#             dc_admin → dc_tor → dc_leaf →
+#             dc_spine → dc_core → aruba_ho_core (LAST)
+# ============================================================
+
+# ── TIER 1: HO Access (safest — push first) ──────────────────
+- name: "Tier 1 — HO Access Switches"
+  hosts: huawei_ho_access
+  gather_facts: false
+  serial: 10
+  roles:
+    - credentials
+    - hardening
+    - access
+    - syslog
+    - snmp
+    - ntp
+
+# ── TIER 2: HO Management ────────────────────────────────────
+- name: "Tier 2 — HO Management Switch"
+  hosts: huawei_ho_mgmt
+  gather_facts: false
+  serial: 1
+  roles:
+    - credentials
+    - hardening
+    - access
+    - syslog
+    - snmp
+    - ntp
+
+# ── TIER 3: HO Server Farm ───────────────────────────────────
+- name: "Tier 3 — HO Server Farm Switch"
+  hosts: huawei_ho_serverfarm
+  gather_facts: false
+  serial: 1
+  roles:
+    - credentials
+    - hardening
+    - access
+    - syslog
+    - snmp
+    - ntp
+
+# ── TIER 4: DC/DRC Admin ─────────────────────────────────────
+- name: "Tier 4 — DC/DRC Admin Switches"
+  hosts: huawei_dc_admin
+  gather_facts: false
+  serial: 1
+  roles:
+    - credentials
+    - hardening
+    - access
+    - syslog
+    - snmp
+    - ntp
+
+# ── TIER 5: DC/DRC TOR ───────────────────────────────────────
+- name: "Tier 5 — DC/DRC Top-of-Rack Switches"
+  hosts: huawei_dc_tor
+  gather_facts: false
+  serial: 5
+  roles:
+    - credentials
+    - hardening
+    - access
+    - syslog
+    - snmp
+    - ntp
+
+# ── TIER 6: DC/DRC Leaf ──────────────────────────────────────
+- name: "Tier 6 — DC/DRC Leaf Switches"
+  hosts: huawei_dc_leaf
+  gather_facts: false
+  serial: 1
+  roles:
+    - credentials
+    - hardening
+    - access
+    - syslog
+    - snmp
+    - ntp
+
+# ── TIER 7: DC/DRC Spine (HIGH RISK) ─────────────────────────
+- name: "Tier 7 — DC/DRC Spine Switches"
+  hosts: huawei_dc_spine
+  gather_facts: false
+  serial: 1
+  roles:
+    - credentials
+    - hardening
+    - access
+    - syslog
+    - snmp
+    - ntp
+
+# ── TIER 8: DC/DRC Core (HIGH RISK) ──────────────────────────
+- name: "Tier 8 — DC/DRC Core Switches"
+  hosts: huawei_dc_core
+  gather_facts: false
+  serial: 1
+  roles:
+    - credentials
+    - hardening
+    - access
+    - syslog
+    - snmp
+    - ntp
+
+# ── TIER 9: HO Core Aruba (PUSH LAST) ────────────────────────
+- name: "Tier 9 — HO Core Aruba 6405v2 (LAST)"
+  hosts: aruba_ho_core
+  gather_facts: false
+  serial: 1
+  roles:
+    - credentials
+    - hardening
+    - access
+    - syslog
+    - snmp
+    - ntp

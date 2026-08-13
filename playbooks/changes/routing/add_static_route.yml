@@ -1,0 +1,15 @@
+---
+# ============================================================
+# Change Playbook: Add static routes to a specific device
+# ── How to use ───────────────────────────────────────────────
+# 1. Add static_routes list to host_vars of target device
+# 2. Target specific device only — never full group for routing
+# ── When to use ─────────────────────────────────────────────
+# FIF requests a new static route on core or spine device
+# ============================================================
+- name: "Change — Add static routes on {{ target_hosts }}"
+  hosts: "{{ target_hosts }}"
+  gather_facts: false
+  serial: 1
+  roles:
+    - static_route

@@ -1,0 +1,12 @@
+---
+# host_vars for: sw-tor-1-b9-bsd
+# Hardware :  CE6857-48S6CQ-EI
+# Role     : huawei_dc_tor
+# Notes    : Switch - TOR 1 #B9 BSD
+# ─────────────────────────────────────────────────────────
+# Add device-specific variables here only if needed.
+# Most config for this device tier is managed via group_vars.
+
+# Example: override SNMP location for this specific device
+# snmp_location: "FILL_RACK_LOCATION"
+# snmp_contact: "FIF Network Team"

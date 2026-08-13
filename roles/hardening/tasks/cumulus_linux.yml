@@ -1,0 +1,17 @@
+---
+- name: "[Cumulus Linux] Disable and mask telnet service"
+  ansible.builtin.systemd:
+    name: telnet.socket
+    enabled: false
+    state: stopped
+    masked: true
+  become: true
+  ignore_errors: true   # socket unit may not exist on all images
+
+- name: "[Cumulus Linux] Ensure plain HTTP mgmt is not exposed (NGINX/lighttpd example)"
+  ansible.builtin.systemd:
+    name: nginx
+    enabled: false
+    state: stopped
+  become: true
+  ignore_errors: true

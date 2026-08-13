@@ -1,0 +1,11 @@
+---
+- name: "[Brocade ICX] Configure virtual ethernet (VE) IP interface"
+  when: vlan_interfaces is defined
+  loop: "{{ vlan_interfaces | default([]) }}"
+  loop_control:
+    label: "ve{{ item.vlan_id }}"
+  community.network.icx_config:
+    lines:
+      - "interface ve {{ item.vlan_id }}"
+      - "  ip address {{ item.ip }} {{ item.mask }}"
+    match: line

@@ -1,0 +1,29 @@
+---
+# host_vars for: sw-spine-2-bsd
+# Hardware : CE8861-4C-EI
+# Role     : huawei_dc_spine
+# Notes    : Switch - Spine #2 BSD
+# ─────────────────────────────────────────────────────────
+# Device-specific variables for this Huawei switch.
+# Add IP interfaces, VLANIFs, loopbacks specific to this device only.
+# Changes here affect ONLY this device when playbooks run.
+
+# Example VLANIF interfaces — fill in actual values
+# vlan_interfaces:
+#   - vlan_id: 10
+#     ip: "FILL_IP"
+#     mask: "255.255.255.0"
+#     description: "MGMT VLAN"
+
+# Example loopback — fill in actual values
+# loopback_interfaces:
+#   - id: 0
+#     ip: "FILL_IP"
+#     mask: "255.255.255.255"
+#     description: "Loopback — sw-spine-2-bsd"
+
+# Example static route
+# static_routes:
+#   - destination: "0.0.0.0"
+#     mask: "0.0.0.0"
+#     nexthop: "FILL_GW_IP"

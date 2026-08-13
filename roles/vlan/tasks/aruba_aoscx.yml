@@ -1,0 +1,8 @@
+---
+- name: "[Aruba AOS-CX] Create VLAN"
+  arubanetworks.aoscx.aoscx_vlans:
+    vlans:
+      - vlan_id: "{{ vlan_id }}"
+        name: "{{ vlan_name }}"
+        description: "{{ vlan_name }}"
+    state: create

@@ -1,0 +1,6 @@
+---
+- name: "[Cumulus Linux] Create VLAN via NCLU"
+  community.network.nclu:
+    commands:
+      - "add vlan {{ vlan_id }}"
+    commit: true

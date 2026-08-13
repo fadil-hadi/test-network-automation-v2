@@ -1,0 +1,23 @@
+---
+cr_id: "CR-001"
+date: "YYYY-MM-DD"
+requested_by: "FIF Network Team"
+approved_by: "Pansolusi Engineer"
+description: "Add VLANIF 30 (SERVER2 VLAN) to dc-core-01 only"
+
+playbook: "playbooks/changes/interface/add_ip_interface.yml"
+
+variables:
+  target_hosts: "dc-core-01"
+
+# NOTE: actual IP config defined in host_vars, not here
+# See: inventory/host_vars/dc-core-01/vars.yml
+
+affected_devices: "dc-core-01 only"
+risk_level: "HIGH"
+rollback_plan: "Remove Vlanif30 from dc-core-01 via manual CLI or rollback playbook"
+
+status: "pending"
+git_commit: ""
+applied_date: ""
+applied_by: ""

@@ -1,0 +1,6 @@
+---
+- name: "[Brocade ICX] Configure SNMP"
+  community.network.icx_config:
+    lines:
+      - "snmp-server community {{ vault_snmp_community_ro }} ro"
+      - "snmp-server host {{ vault_snmp_trap_host }} {{ vault_snmp_community_ro }}"

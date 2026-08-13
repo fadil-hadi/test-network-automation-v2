@@ -1,0 +1,10 @@
+---
+- name: "[Aruba AOS-CX] Enable SSH"
+  arubanetworks.aoscx.aoscx_config:
+    lines:
+      - "ssh server vrf mgmt"
+
+- name: "[Aruba AOS-CX] Enable HTTPS"
+  arubanetworks.aoscx.aoscx_config:
+    lines:
+      - "https-server vrf mgmt"

@@ -1,0 +1,7 @@
+---
+- name: "[Huawei S] Configure NTP servers"
+  community.network.ce_config:
+    lines:
+      - "ntp unicast-server {{ ntp_primary }} prefer"
+      - "ntp unicast-server {{ ntp_secondary }}"
+    match: line

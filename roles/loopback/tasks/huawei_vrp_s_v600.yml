@@ -1,0 +1,17 @@
+---
+# Huawei S-Series on VRP V600 branch (V600R022/V600R024) — e.g. S8700-4 core,
+# S5735-*-V2 access units. Starts as a copy of huawei_vrp_s.yml (V200 branch).
+# TODO: validate against a real V600 dev/test unit and diverge here if the
+# CLI differs (AAA, SNMP, and syslog keywords are the most likely to shift
+# between VRP major branches). See docs/firmware-notes.md.
+- name: "[Huawei S] Configure loopback interfaces"
+  when: loopback_interfaces is defined
+  loop: "{{ loopback_interfaces | default([]) }}"
+  loop_control:
+    label: "LoopBack{{ item.id }}"
+  community.network.ce_config:
+    lines:
+      - "interface LoopBack{{ item.id }}"
+      - "  description {{ item.description }}"
+      - "  ip address {{ item.ip }} {{ item.mask }}"
+    match: line

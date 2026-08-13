@@ -1,0 +1,13 @@
+---
+- name: "[Huawei CE] Disable Telnet server"
+  community.network.ce_config:
+    lines:
+      - "undo telnet server enable"
+      - "undo telnet ipv6 server enable"
+    match: line
+
+- name: "[Huawei CE] Disable HTTP server"
+  community.network.ce_config:
+    lines:
+      - "undo http server enable"
+    match: line

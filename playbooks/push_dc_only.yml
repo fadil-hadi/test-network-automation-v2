@@ -1,0 +1,33 @@
+---
+# ============================================================
+# Push to DC/DRC devices only — in correct tier order
+# ============================================================
+- name: "DC/DRC Admin"
+  hosts: huawei_dc_admin
+  gather_facts: false
+  serial: 1
+  roles: [credentials, hardening, access, syslog, snmp, ntp]
+
+- name: "DC/DRC TOR"
+  hosts: huawei_dc_tor
+  gather_facts: false
+  serial: 5
+  roles: [credentials, hardening, access, syslog, snmp, ntp]
+
+- name: "DC/DRC Leaf"
+  hosts: huawei_dc_leaf
+  gather_facts: false
+  serial: 1
+  roles: [credentials, hardening, access, syslog, snmp, ntp]
+
+- name: "DC/DRC Spine"
+  hosts: huawei_dc_spine
+  gather_facts: false
+  serial: 1
+  roles: [credentials, hardening, access, syslog, snmp, ntp]
+
+- name: "DC/DRC Core"
+  hosts: huawei_dc_core
+  gather_facts: false
+  serial: 1
+  roles: [credentials, hardening, access, syslog, snmp, ntp]

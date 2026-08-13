@@ -1,0 +1,8 @@
+---
+- name: "[Huawei CE] Configure trunk port allowed VLANs"
+  community.network.ce_config:
+    lines:
+      - "interface {{ interface_name }}"
+      - "  port link-type trunk"
+      - "  port trunk allow-pass vlan {{ trunk_vlan_list }}"
+    match: line

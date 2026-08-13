@@ -1,0 +1,10 @@
+---
+- name: "[Huawei CE] Add static routes"
+  when: static_routes is defined
+  loop: "{{ static_routes | default([]) }}"
+  loop_control:
+    label: "Route to {{ item.destination }}"
+  community.network.ce_config:
+    lines:
+      - "ip route-static {{ item.destination }} {{ item.mask }} {{ item.nexthop }} description {{ item.description }}"
+    match: line

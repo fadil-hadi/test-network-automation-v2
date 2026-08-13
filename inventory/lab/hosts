@@ -1,0 +1,22 @@
+# ============================================================
+# FIF Network Automation — LAB inventory
+# Office mock-up used to validate the CI/CD pipeline end to end
+# (Git -> Semaphore -> Ansible push, and Oxidized backup) BEFORE
+# it ever touches production Huawei/Aruba gear.
+#
+# IMPORTANT: Cumulus Linux and Brocade CES/ICX are stand-ins for
+# PIPELINE validation only. They do NOT prove Huawei VRP or Aruba
+# AOS-CX command syntax — see docs/lab-strategy.md.
+# ============================================================
+
+[cumulus_lab]
+lab-cumulus-01  ansible_host=FILL_LAB_IP  # Cumulus VX/Linux — spine stand-in
+lab-cumulus-02  ansible_host=FILL_LAB_IP  # Cumulus VX/Linux — leaf stand-in
+
+[brocade_lab]
+lab-icx-01  ansible_host=FILL_LAB_IP  # Brocade/Ruckus ICX 7150 — access stand-in
+lab-ces-01  ansible_host=FILL_LAB_IP  # Brocade CES 2000 — access stand-in
+
+[lab_all:children]
+cumulus_lab
+brocade_lab

@@ -1,0 +1,10 @@
+---
+- name: "[Aruba AOS-CX] Disable Telnet"
+  arubanetworks.aoscx.aoscx_config:
+    lines:
+      - "no telnet-server"
+
+- name: "[Aruba AOS-CX] Disable HTTP (enforce HTTPS only)"
+  arubanetworks.aoscx.aoscx_config:
+    lines:
+      - "no web-management plaintext"

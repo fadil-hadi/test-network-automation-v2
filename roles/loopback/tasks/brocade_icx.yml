@@ -1,0 +1,11 @@
+---
+- name: "[Brocade ICX] Configure loopback interfaces"
+  when: loopback_interfaces is defined
+  loop: "{{ loopback_interfaces | default([]) }}"
+  loop_control:
+    label: "loopback{{ item.id }}"
+  community.network.icx_config:
+    lines:
+      - "interface loopback {{ item.id }}"
+      - "  ip address {{ item.ip }} {{ item.mask }}"
+    match: line

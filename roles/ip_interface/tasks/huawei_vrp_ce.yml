@@ -1,0 +1,13 @@
+---
+- name: "[Huawei CE] Configure VLANIF IP interfaces"
+  when: vlan_interfaces is defined
+  loop: "{{ vlan_interfaces | default([]) }}"
+  loop_control:
+    label: "VLANIF{{ item.vlan_id }}"
+  community.network.ce_config:
+    lines:
+      - "interface Vlanif{{ item.vlan_id }}"
+      - "  description {{ item.description }}"
+      - "  ip address {{ item.ip }} {{ item.mask }}"
+      - "  undo shutdown"
+    match: line

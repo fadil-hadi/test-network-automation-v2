@@ -1,0 +1,12 @@
+---
+# Huawei S-Series on VRP V600 branch (V600R022/V600R024) — e.g. S8700-4 core,
+# S5735-*-V2 access units. Starts as a copy of huawei_vrp_s.yml (V200 branch).
+# TODO: validate against a real V600 dev/test unit and diverge here if the
+# CLI differs (AAA, SNMP, and syslog keywords are the most likely to shift
+# between VRP major branches). See docs/firmware-notes.md.
+- name: "[Huawei S] Configure NTP servers"
+  community.network.ce_config:
+    lines:
+      - "ntp unicast-server {{ ntp_primary }} prefer"
+      - "ntp unicast-server {{ ntp_secondary }}"
+    match: line

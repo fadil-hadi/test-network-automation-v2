@@ -1,0 +1,6 @@
+---
+- name: "[Cumulus Linux] Assign access VLAN to interface via NCLU"
+  community.network.nclu:
+    commands:
+      - "add interface {{ interface_name }} bridge access {{ vlan_id }}"
+    commit: true

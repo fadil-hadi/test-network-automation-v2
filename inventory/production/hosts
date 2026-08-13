@@ -1,0 +1,175 @@
+# FIF Network Automation — Ansible Inventory
+# Generated from FIF device Excel. Replace ansible_host with actual management IPs.
+# Push order: ho_access → dc_admin → dc_tor → dc_leaf → dc_spine → dc_core → ho_core
+
+[huawei_ho_access]
+sw-access-lt-10-amf  ansible_host=FILL_IP  # S5731-S48P4X | SW-ACCESS-LT-10-AMF
+sw-access-lt-6-1  ansible_host=FILL_IP  # S5731-S48P4X | SW-ACCESS-LT-6 #1
+sw-access-lt-6-2  ansible_host=FILL_IP  # S5731-S48P4X | SW-ACCESS-LT-6 #2
+sw-access-lt-6-3  ansible_host=FILL_IP  # S5731-S48P4X | SW-ACCESS-LT-6 #3
+sw-access-lt-6-4  ansible_host=FILL_IP  # S5731-S48P4X | SW-ACCESS-LT-6 #4
+sw-access-lt-7-slot0  ansible_host=FILL_IP  # S5731-S48P4X | SW-ACCESS-LT-7 SLOT#0
+sw-access-lt-7-slot1  ansible_host=FILL_IP  # S5731-S48P4X | SW-ACCESS-LT-7 SLOT#1
+sw-access-lt-7-slot2  ansible_host=FILL_IP  # S5731-S48P4X | SW-ACCESS-LT-7 SLOT#2
+sw-access-lt-7-slot3  ansible_host=FILL_IP  # S5731-S48P4X | SW-ACCESS-LT-7 SLOT#3
+sw-access-lt-7-slot4  ansible_host=FILL_IP  # S5731-S48P4X | SW-ACCESS-LT-7 SLOT#4
+sw-access-lt-8-slot0  ansible_host=FILL_IP  # S5731-S48P4X | SW-ACCESS-LT-8 SLOT#0
+sw-access-lt-8-slot1  ansible_host=FILL_IP  # S5731-S48P4X | SW-ACCESS-LT-8 SLOT#1
+sw-access-lt-8-slot2  ansible_host=FILL_IP  # S5731-S48P4X | SW-ACCESS-LT-8 SLOT#2
+sw-access-lt-8-slot3  ansible_host=FILL_IP  # S5731-S48P4X | SW-ACCESS-LT-8 SLOT#3
+sw-access-lt-8-slot4  ansible_host=FILL_IP  # S5731-S48P4X | SW-ACCESS-LT-8 SLOT#4
+sw-access-lt-9-slot0  ansible_host=FILL_IP  # S5731-S48P4X | SW-ACCESS-LT-9 SLOT#0
+sw-access-lt-9-slot1  ansible_host=FILL_IP  # S5731-S48P4X | SW-ACCESS-LT-9 SLOT#1
+sw-access-lt-16  ansible_host=FILL_IP  # S5731-S48P4X | SW-ACCESS-LT-16
+sw-access-lt-11  ansible_host=FILL_IP  # S5731-S48P4X | SW-ACCESS-LT-11
+sw-access-ho-lt-2  ansible_host=FILL_IP  # S5731-S48P4X | SW-ACCESS-HO LT-2
+sw-access-ho-lt-3-1  ansible_host=FILL_IP  # S5731-S48P4X | SW-ACCESS-HO LT-3 - #1
+sw-access-ho-lt-3-2  ansible_host=FILL_IP  # S5731-S48T4X | SW-ACCESS-HO LT-3 - #2
+sw-access-ho-lt-3-3  ansible_host=FILL_IP  # S5731-S48T4X | SW-ACCESS-HO LT-3 - #3
+sw-access-ho-lt-3-4  ansible_host=FILL_IP  # S5731-S48T4X | SW-ACCESS-HO LT-3 - #4
+sw-access-ho-lt-3-5  ansible_host=FILL_IP  # S5731-S48T4X | SW-ACCESS-HO LT-3 - #5
+sw-access-ho-lt-5-1  ansible_host=FILL_IP  # S5731-S48P4X | SW-ACCESS-HO LT-5 - #1
+sw-access-ho-lt-5-2  ansible_host=FILL_IP  # S5731-S48T4X | SW-ACCESS-HO LT-5 - #2
+sw-access-ho-lt-5-3  ansible_host=FILL_IP  # S5731-S48T4X | SW-ACCESS-HO LT-5 - #3
+sw-access-ho-lt-5-4  ansible_host=FILL_IP  # S5731-S48T4X | SW-ACCESS-HO LT-5 - #4
+sw-access-ho-lt-5-5  ansible_host=FILL_IP  # S5731-S48T4X | SW-ACCESS-HO LT-5 - #5
+sw-access-ho-lt-5-6  ansible_host=FILL_IP  # S5731-S48T4X | SW-ACCESS-HO LT-5 - #6
+sw-access-ho-lt-5-7  ansible_host=FILL_IP  # S5731-S48T4X | SW-ACCESS-HO LT-5 - #7
+sw-access-ho-lt-6-1  ansible_host=FILL_IP  # S5731-S48P4X | SW-ACCESS-HO LT-6 - #1
+sw-access-ho-lt-6-2  ansible_host=FILL_IP  # S5731-S48T4X | SW-ACCESS-HO LT-6 - #2
+sw-access-ho-lt-6-3  ansible_host=FILL_IP  # S5731-S48T4X | SW-ACCESS-HO LT-6 - #3
+sw-access-ho-lt-6-4  ansible_host=FILL_IP  # S5731-S48T4X | SW-ACCESS-HO LT-6 - #4
+sw-access-ho-lt-7-1  ansible_host=FILL_IP  # S5731-S48P4X | SW-ACCESS-HO LT-7 - #1
+sw-access-ho-lt-7-2  ansible_host=FILL_IP  # S5731-S48T4X | SW-ACCESS-HO LT-7 - #2
+sw-access-ho-lt-7-3  ansible_host=FILL_IP  # S5731-S48T4X | SW-ACCESS-HO LT-7 - #3
+sw-access-ho-lt-7-4  ansible_host=FILL_IP  # S5731-S48T4X | SW-ACCESS-HO LT-7 - #4
+sw-access-ho-lt-7-5  ansible_host=FILL_IP  # S5731-S48T4X | SW-ACCESS-HO LT-7 - #5
+sw-access-ho-lt-8-1  ansible_host=FILL_IP  # S5731-S48P4X | SW-ACCESS-HO LT-8 - #1
+sw-access-ho-lt-8-2  ansible_host=FILL_IP  # S5731-S48T4X | SW-ACCESS-HO LT-8 - #2
+sw-access-ho-lt-8-3  ansible_host=FILL_IP  # S5731-S48T4X | SW-ACCESS-HO LT-8 - #3
+sw-access-ho-lt-8-4  ansible_host=FILL_IP  # S5731-S48T4X | SW-ACCESS-HO LT-8 - #4
+sw-access-ho-lt-8-5  ansible_host=FILL_IP  # S5731-S48T4X | SW-ACCESS-HO LT-8 - #5
+sw-access-ho-lt-9-1  ansible_host=FILL_IP  # S5735-S48PN4XE-V2 | SW-ACCESS-HO LT-9 - #1
+sw-access-ho-lt-9-2  ansible_host=FILL_IP  # S5735-S48T4XE-V2 | SW-ACCESS-HO LT-9 - #2
+sw-access-ho-lt-9-3  ansible_host=FILL_IP  # S5735-S48T4XE-V2 | SW-ACCESS-HO LT-9 - #3
+sw-access-ho-lt-9-4  ansible_host=FILL_IP  # S5735-S48T4XE-V2 | SW-ACCESS-HO LT-9 - #4
+sw-access-ho-lt-9-5  ansible_host=FILL_IP  # S5735-S48T4XE-V2 | SW-ACCESS-HO LT-9 - #5
+sw-access-ho-lt-10-1  ansible_host=FILL_IP  # S5731-S48P4X | SW-ACCESS-HO LT-10 - #1
+sw-access-ho-lt-10-2  ansible_host=FILL_IP  # S5731-S48T4X | SW-ACCESS-HO LT-10 - #2
+sw-access-ho-lt-10-3  ansible_host=FILL_IP  # S5731-S48T4X | SW-ACCESS-HO LT-10 - #3
+sw-access-ho-lt-10-4  ansible_host=FILL_IP  # S5731-S48T4X | SW-ACCESS-HO LT-10 - #4
+sw-access-ho-lt-10-5  ansible_host=FILL_IP  # S5731-S48T4X | SW-ACCESS-HO LT-10 - #5
+sw-access-ho-lt-10-compliance-1  ansible_host=FILL_IP  # S5731-S48P4X | SW-ACCESS-HO LT-10-COMPLIANCE - #1
+sw-access-ho-lt-10-compliance-2  ansible_host=FILL_IP  # S5731-S48T4X | SW-ACCESS-HO LT-10-COMPLIANCE - #2
+sw-access-ho-lt-10-compliance-3  ansible_host=FILL_IP  # S5731-S48T4X | SW-ACCESS-HO LT-10-COMPLIANCE - #3
+sw-access-ho-lt-11-amitra-1  ansible_host=FILL_IP  # S5731-S48P4X | SW-ACCESS-HO LT-11-AMITRA - #1
+sw-access-ho-lt-11-spektra-1  ansible_host=FILL_IP  # S5731-S48P4X | SW-ACCESS-HO LT-11-SPEKTRA - #1
+sw-access-ho-lt-16-1  ansible_host=FILL_IP  # S5731-S48P4X | SW-ACCESS-HO LT-16 - #1
+sw-access-ho-lt-16-2  ansible_host=FILL_IP  # S5731-S48P4X | SW-ACCESS-HO LT-16 - #2
+sw-access-ho-lt-16-3  ansible_host=FILL_IP  # S5731-S48P4X | SW-ACCESS-HO LT-16 - #3
+sw-access-ho-lt-17-1  ansible_host=FILL_IP  # S5735-S48PN4XE-V2 | SW-ACCESS-HO LT-17 - #1
+
+[huawei_ho_mgmt]
+sw-management-ho  ansible_host=FILL_IP  # S5731-S48T4X | Switch - Management HO
+
+[huawei_ho_serverfarm]
+sw-server-farm-ho  ansible_host=FILL_IP  # S5732-H48XUM2CC | Switch -  Server Farm HO
+
+[huawei_dc_admin]
+sw-admin-2-bsd  ansible_host=FILL_IP  # S5735-L48T4X-A | Switch - Admin #2 BSD
+sw-admin-3-bsd  ansible_host=FILL_IP  # S5735-L48T4X-A | Switch - Admin #3 BSD
+sw-admin-1-drc  ansible_host=FILL_IP  # S5735-L48T4X-A | Switch - Admin #1 DRC
+sw-admin-2-drc  ansible_host=FILL_IP  # S5735-L48T4X-A | Switch - Admin #2 DRC
+
+[huawei_dc_tor]
+sw-tor-1-b1-bsd  ansible_host=FILL_IP  #  CE6857-48S6CQ-EI | Switch - TOR 1 #B1 BSD
+sw-tor-1-b2-bsd  ansible_host=FILL_IP  #  CE6857-48S6CQ-EI | Switch - TOR 1 #B2 BSD
+sw-tor-1-b3-bsd  ansible_host=FILL_IP  #  CE6857-48S6CQ-EI | Switch - TOR 1 #B3 BSD
+sw-tor-1-b4-bsd  ansible_host=FILL_IP  #  CE6857-48S6CQ-EI | Switch - TOR 1 #B4 BSD
+sw-tor-1-b5-bsd  ansible_host=FILL_IP  #  CE6857-48S6CQ-EI | Switch - TOR 1 #B5 BSD
+sw-tor-1-b6-bsd  ansible_host=FILL_IP  #  CE6857-48S6CQ-EI | Switch - TOR 1 #B6 BSD
+sw-tor-1-b7-bsd  ansible_host=FILL_IP  #  CE6857-48S6CQ-EI | Switch - TOR 1 #B7 BSD
+sw-tor-1-b8-bsd  ansible_host=FILL_IP  #  CE6857-48S6CQ-EI | Switch - TOR 1 #B8 BSD
+sw-tor-1-b9-bsd  ansible_host=FILL_IP  #  CE6857-48S6CQ-EI | Switch - TOR 1 #B9 BSD
+sw-tor-1-b11-bsd  ansible_host=FILL_IP  #  CE6857-48S6CQ-EI | Switch - TOR 1 #B11 BSD
+sw-tor-2-b1-bsd  ansible_host=FILL_IP  # CE6881-48S6CQ | Switch - TOR 2 #B1 BSD
+sw-tor-2-b2-bsd  ansible_host=FILL_IP  # CE6881-48S6CQ | Switch - TOR 2 #B2 BSD
+sw-tor-2-b3-bsd  ansible_host=FILL_IP  # CE6881-48S6CQ | Switch - TOR 2 #B3 BSD
+sw-tor-2-b4-bsd-off-rma  ansible_host=FILL_IP  # CE6881-48S6CQ | Switch - TOR 2 #B4 BSD (OFF RMA)
+sw-tor-2-b5-bsd  ansible_host=FILL_IP  # CE6881-48S6CQ | Switch - TOR 2 #B5 BSD
+sw-tor-2-b6-bsd  ansible_host=FILL_IP  # CE6881-48S6CQ | Switch - TOR 2 #B6 BSD
+sw-tor-2-b7-bsd  ansible_host=FILL_IP  # CE6881-48S6CQ | Switch - TOR 2 #B7 BSD
+sw-tor-2-b8-bsd  ansible_host=FILL_IP  # CE6881-48S6CQ | Switch - TOR 2 #B8 BSD
+sw-tor-2-b9-bsd  ansible_host=FILL_IP  # CE6881-48S6CQ | Switch - TOR 2 #B9 BSD
+sw-tor-iscsi-1-a8-bsd  ansible_host=FILL_IP  # CE6863E-48S6CQ-B | Switch - TOR ISCSI-1 #A8 BSD
+sw-tor-iscsi-2-a8-bsd  ansible_host=FILL_IP  # CE6863E-48S6CQ-B | Switch - TOR ISCSI-2 #A8 BSD
+sw-tor-iscsi-1-b1-bsd  ansible_host=FILL_IP  # CE6863E-48S6CQ-B | Switch - TOR ISCSI-1 #B1 BSD
+sw-tor-iscsi-2-b1-bsd  ansible_host=FILL_IP  # CE6863E-48S6CQ-B | Switch - TOR ISCSI-2 #B1 BSD
+sw-tor-iscsi-1-b4-bsd  ansible_host=FILL_IP  # CE6863E-48S6CQ-B | Switch - TOR ISCSI-1 #B4 BSD
+sw-tor-iscsi-2-b4-bsd  ansible_host=FILL_IP  # CE6863E-48S6CQ-B | Switch - TOR ISCSI-2 #B4 BSD
+sw-tor-iscsi-1-b8-bsd  ansible_host=FILL_IP  # CE6863E-48S6CQ-B | Switch - TOR ISCSI-1 #B8 BSD
+sw-tor-iscsi-2-b8-bsd  ansible_host=FILL_IP  # CE6863E-48S6CQ-B | Switch - TOR ISCSI-2 #B8 BSD
+sw-tor-iscsi-1-b9-bsd  ansible_host=FILL_IP  # CE6863E-48S6CQ-B | Switch - TOR ISCSI-1 #B9 BSD
+sw-tor-iscsi-2-b9-bsd  ansible_host=FILL_IP  # CE6863E-48S6CQ-B | Switch - TOR ISCSI-2 #B9 BSD
+sw-tor-d1-drc  ansible_host=FILL_IP  # CE6881-48S6CQ | Switch - TOR #D1 DRC
+sw-tor-d2-drc  ansible_host=FILL_IP  # CE6881-48S6CQ | Switch - TOR #D2 DRC
+sw-tor-d3-drc  ansible_host=FILL_IP  # CE6881-48S6CQ | Switch - TOR #D3 DRC
+sw-tor-d4-drc  ansible_host=FILL_IP  # CE6881-48S6CQ | Switch - TOR #D4 DRC
+sw-tor-e2-drc  ansible_host=FILL_IP  # CE6881-48S6CQ | Switch - TOR #E2 DRC
+sw-tor-2-d1-drc  ansible_host=FILL_IP  # CE6881-48S6CQ-B | Switch - TOR 2 #D1 DRC
+sw-tor-2-d2-drc  ansible_host=FILL_IP  # CE6881-48S6CQ-B | Switch - TOR 2 #D2 DRC
+sw-tor-2-d3-drc  ansible_host=FILL_IP  # CE6881-48S6CQ-B | Switch - TOR 2 #D3 DRC
+sw-tor-2-d4-drc  ansible_host=FILL_IP  # CE6881-48S6CQ-B | Switch - TOR 2 #D4 DRC
+sw-tor-2-e2-drc  ansible_host=FILL_IP  # CE6881-48S6CQ-B | Switch - TOR 2 #E2 DRC
+sw-tor-1-e3-drc  ansible_host=FILL_IP  # CE6881-48S6CQ-B | Switch - TOR 1 #E3 DRC
+sw-tor-1-e4-drc  ansible_host=FILL_IP  # CE6881-48S6CQ-B | Switch - TOR 1 #E4 DRC
+
+[huawei_dc_leaf]
+sw-leaf-utp-1-bsd  ansible_host=FILL_IP  # CE6870-48T6CQ-EI | Switch - Leaf UTP #1 BSD
+sw-leaf-utp-2-bsd  ansible_host=FILL_IP  # CE6870-48T6CQ-EI | Switch - Leaf UTP #2 BSD
+sw-leaf-utp-3-bsd  ansible_host=FILL_IP  # CE6870-48T6CQ-EI | Switch - Leaf UTP #3 BSD
+sw-leaf-utp-1-drc  ansible_host=FILL_IP  # CE6881-48T6CQ | Switch - Leaf UTP #1 DRC
+sw-leaf-utp-2-drc  ansible_host=FILL_IP  # CE6881-48T6CQ | Switch - Leaf UTP #2 DRC
+
+[huawei_dc_spine]
+sw-spine-1-bsd  ansible_host=FILL_IP  # CE8861-4C-EI | Switch - Spine #1 BSD
+sw-spine-2-bsd  ansible_host=FILL_IP  # CE8861-4C-EI | Switch - Spine #2 BSD
+sw-spine-1-drc  ansible_host=FILL_IP  # CE8861-4C-EI | Switch - Spine #1 DRC
+sw-spine-2-drc  ansible_host=FILL_IP  # CE8861-4C-EI | Switch - Spine #2 DRC
+
+[huawei_dc_core]
+sw-core-a-bsd  ansible_host=FILL_IP  # S7703 | Switch - Core #A BSD
+sw-core-b-bsd  ansible_host=FILL_IP  # S7703 | Switch - Core #B BSD
+sw-core-a-drc  ansible_host=FILL_IP  # S8700-4 | Switch - Core A DRC
+sw-core-b-drc  ansible_host=FILL_IP  # S8700-4 | Switch - Core B DRC
+
+[aruba_ho_core]
+sw-core-ho1  ansible_host=FILL_IP  # 6405v2 | Switch - Core HO#1
+sw-core-2-ho  ansible_host=FILL_IP  # 6405v2 | Switch - Core #2 HO
+
+[huawei_dc:children]
+huawei_dc_spine
+huawei_dc_leaf
+huawei_dc_tor
+huawei_dc_core
+huawei_dc_admin
+
+[huawei_ho:children]
+huawei_ho_access
+huawei_ho_mgmt
+huawei_ho_serverfarm
+
+[huawei_all:children]
+huawei_dc
+huawei_ho
+
+[aruba_all]
+sw-core-ho1  ansible_host=FILL_IP  # 6405v2 | Switch - Core HO#1
+sw-core-2-ho  ansible_host=FILL_IP  # 6405v2 | Switch - Core #2 HO
+
+[all_managed:children]
+huawei_all
+aruba_all
+
+# EXCLUDED — Aruba Instant On 1930 (cloud-managed, no SSH/CLI)
+# sw-access-ho-lt-12-1  # Instant On 1930 — HO Lt.12

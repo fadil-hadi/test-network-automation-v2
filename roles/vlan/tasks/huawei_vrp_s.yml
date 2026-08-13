@@ -1,0 +1,7 @@
+---
+- name: "[Huawei S] Create VLAN"
+  community.network.ce_config:
+    lines:
+      - "vlan {{ vlan_id }}"
+      - "  description {{ vlan_name }}"
+    match: line

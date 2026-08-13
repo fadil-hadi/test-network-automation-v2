@@ -1,0 +1,17 @@
+---
+# Lab-wide variables — mirrors inventory/production/group_vars/all/vars.yml
+# so the SAME roles/playbooks run unmodified against the lab.
+syslog_server: "FILL_LAB_SYSLOG_IP"
+syslog_port: 514
+syslog_facility: "local7"
+syslog_severity: "informational"
+
+ntp_primary: "FILL_LAB_NTP_PRIMARY_IP"
+ntp_secondary: "FILL_LAB_NTP_SECONDARY_IP"
+ntp_timezone: "Asia/Jakarta"
+
+ssh_version: 2
+ssh_timeout: 300
+
+snmp_version: "v2c"
+snmp_trap_version: "v2c"

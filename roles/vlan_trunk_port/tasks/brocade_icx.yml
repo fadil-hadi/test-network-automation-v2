@@ -1,0 +1,8 @@
+---
+- name: "[Brocade ICX] Add tagged VLANs to trunk interface"
+  community.network.icx_config:
+    lines:
+      - "vlan {{ item }}"
+      - "  tagged ethe {{ interface_name }}"
+    match: line
+  loop: "{{ trunk_vlan_list.split(',') }}"

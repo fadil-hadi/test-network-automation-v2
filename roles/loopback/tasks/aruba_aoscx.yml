@@ -1,0 +1,11 @@
+---
+- name: "[Aruba AOS-CX] Configure loopback interfaces"
+  when: loopback_interfaces is defined
+  loop: "{{ loopback_interfaces | default([]) }}"
+  loop_control:
+    label: "loopback{{ item.id }}"
+  arubanetworks.aoscx.aoscx_l3_interface:
+    interface: "loopback{{ item.id }}"
+    ipv4: "{{ item.ip }}/{{ item.mask }}"
+    description: "{{ item.description }}"
+    state: create

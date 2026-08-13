@@ -1,0 +1,19 @@
+---
+# host_vars for: sw-access-ho-lt-17-1
+# Hardware : S5735-S48PN4XE-V2
+# Role     : huawei_ho_access
+# Notes    : SW-ACCESS-HO LT-17 - #1
+# ─────────────────────────────────────────────────────────
+
+# FIRMWARE OVERRIDE — this unit runs VRP V600 (V600R022/V600R024), not the
+# V200 branch most of this group is on. Overriding device_series so it uses
+# a separate task file per role until validated identical to V200 behavior.
+# See docs/firmware-notes.md.
+device_series: "huawei_vrp_s_v600"
+
+# Add device-specific variables here only if needed.
+# Most config for this device tier is managed via group_vars.
+
+# Example: override SNMP location for this specific device
+# snmp_location: "FILL_RACK_LOCATION"
+# snmp_contact: "FIF Network Team"

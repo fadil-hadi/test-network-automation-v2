@@ -1,0 +1,10 @@
+---
+- name: "[Cumulus Linux] Configure SVI IP address via NCLU"
+  when: vlan_interfaces is defined
+  loop: "{{ vlan_interfaces | default([]) }}"
+  loop_control:
+    label: "vlan{{ item.vlan_id }}"
+  community.network.nclu:
+    commands:
+      - "add interface vlan{{ item.vlan_id }} ip address {{ item.ip }}/{{ item.prefix_length }}"
+    commit: true

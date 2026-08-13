@@ -1,0 +1,8 @@
+---
+# DC/DRC Top-of-Rack Switches — Huawei CE-Series
+# Uses community.network.ce collection for CE-Series VRP
+ansible_network_os: community.network.ce
+ansible_connection: network_cli
+device_series: "huawei_vrp_ce"
+device_location: "DC/DRC"
+device_role: "tor"

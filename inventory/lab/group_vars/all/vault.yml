@@ -1,0 +1,7 @@
+---
+# ANSIBLE VAULT — encrypt before commit: ansible-vault encrypt inventory/lab/group_vars/all/vault.yml
+vault_local_username: "FILL_LAB_USERNAME"
+vault_local_password: "FILL_LAB_PASSWORD"
+vault_snmp_community_ro: "FILL_LAB_RO_COMMUNITY"
+vault_snmp_community_rw: "FILL_LAB_RW_COMMUNITY"
+vault_snmp_trap_host: "FILL_LAB_SNMP_TRAP_HOST"

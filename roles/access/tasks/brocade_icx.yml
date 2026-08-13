@@ -1,0 +1,10 @@
+---
+- name: "[Brocade ICX] Enable SSH"
+  community.network.icx_config:
+    lines:
+      - "ip ssh"
+
+- name: "[Brocade ICX] Enable HTTPS management"
+  community.network.icx_config:
+    lines:
+      - "ip http secure-server"

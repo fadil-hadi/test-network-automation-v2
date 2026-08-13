@@ -1,0 +1,48 @@
+---
+# ============================================================
+# LAB pipeline validation playbook
+# Purpose: prove the Git -> Semaphore -> Ansible -> Oxidized
+# pipeline works end-to-end (branch protection, Vault secrets,
+# job template chaining, backup/diff/commit) using in-office
+# Cumulus Linux + Brocade CES/ICX hardware.
+#
+# This intentionally reuses the EXACT same roles as
+# playbooks/site.yml. Only inventory/lab/* differs from
+# inventory/production/*. Passing here proves the pipeline
+# plumbing; it does NOT prove Huawei VRP / Aruba AOS-CX CLI
+# correctness — that still requires the real dev/test devices
+# called out in SoW Section 4 (Required Components).
+# ============================================================
+
+- name: "Lab — Cumulus Linux (datacenter stand-in)"
+  hosts: cumulus_lab
+  gather_facts: false
+  serial: 1
+  roles:
+    - credentials
+    - hardening
+    - access
+    - syslog
+    - snmp
+    - ntp
+    - vlan
+    - vlan_access_port
+    - vlan_trunk_port
+    - ip_interface
+    - loopback
+    - static_route
+
+- name: "Lab — Brocade CES/ICX (access stand-in)"
+  hosts: brocade_lab
+  gather_facts: false
+  serial: 1
+  roles:
+    - credentials
+    - hardening
+    - access
+    - syslog
+    - snmp
+    - ntp
+    - vlan
+    - vlan_access_port
+    - vlan_trunk_port

@@ -1,0 +1,10 @@
+---
+- name: "[Huawei CE] Configure SNMP agent"
+  community.network.ce_config:
+    lines:
+      - "snmp-agent"
+      - "snmp-agent community read {{ vault_snmp_community_ro }}"
+      - "snmp-agent community write {{ vault_snmp_community_rw }}"
+      - "snmp-agent trap enable"
+      - "snmp-agent target-host trap address udp-domain {{ vault_snmp_trap_host }} udp-port 162 params securityname {{ vault_snmp_community_ro }}"
+    match: line

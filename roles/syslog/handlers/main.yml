@@ -1,0 +1,6 @@
+---
+- name: restart rsyslog cumulus
+  ansible.builtin.systemd:
+    name: rsyslog
+    state: restarted
+  become: true

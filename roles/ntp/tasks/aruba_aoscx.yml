@@ -1,0 +1,6 @@
+---
+- name: "[Aruba AOS-CX] Configure NTP servers"
+  arubanetworks.aoscx.aoscx_config:
+    lines:
+      - "ntp server {{ ntp_primary }} prefer"
+      - "ntp server {{ ntp_secondary }}"

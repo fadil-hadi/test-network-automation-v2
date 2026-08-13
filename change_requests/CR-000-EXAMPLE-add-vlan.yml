@@ -1,0 +1,33 @@
+---
+# ============================================================
+# Change Request Template — copy this file for each change
+# Rename: CR-XXX-short-description.yml
+# ============================================================
+
+cr_id: "CR-000"
+date: "YYYY-MM-DD"
+requested_by: "FIF Network Team — <name>"
+approved_by: "Pansolusi Engineer — <name>"
+description: "FILL: brief description of the change"
+
+# Which playbook to run
+playbook: "playbooks/changes/vlan/add_vlan.yml"
+
+# Variables passed to the playbook
+variables:
+  vlan_id: 100
+  vlan_name: "EXAMPLE_VLAN"
+  target_hosts: "huawei_ho_access"
+
+# Which devices are affected
+affected_devices: "All HO access switches (65 devices)"
+
+# Risk assessment
+risk_level: "LOW"        # LOW / MEDIUM / HIGH / CRITICAL
+rollback_plan: "Remove VLAN from all access switches using remove_vlan playbook"
+
+# After execution
+status: "pending"        # pending / applied / rolled-back
+git_commit: ""           # fill in after merge
+applied_date: ""
+applied_by: ""

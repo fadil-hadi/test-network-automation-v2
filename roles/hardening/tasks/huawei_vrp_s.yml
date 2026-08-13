@@ -1,0 +1,15 @@
+---
+# Kept separate from CE-series per SoW 3.1 — same VRP syntax today,
+# patch here independently if S-series firmware diverges.
+- name: "[Huawei S] Disable Telnet server"
+  community.network.ce_config:
+    lines:
+      - "undo telnet server enable"
+      - "undo telnet ipv6 server enable"
+    match: line
+
+- name: "[Huawei S] Disable HTTP server"
+  community.network.ce_config:
+    lines:
+      - "undo http server enable"
+    match: line

@@ -1,0 +1,13 @@
+---
+- name: "[Huawei CE] Enable SSH server"
+  community.network.ce_config:
+    lines:
+      - "stelnet server enable"
+      - "ssh server-source -i all"
+    match: line
+
+- name: "[Huawei CE] Enable HTTPS server"
+  community.network.ce_config:
+    lines:
+      - "http secure-server enable"
+    match: line

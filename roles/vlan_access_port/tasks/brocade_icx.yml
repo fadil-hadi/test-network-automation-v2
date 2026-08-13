@@ -1,0 +1,7 @@
+---
+- name: "[Brocade ICX] Assign untagged (access) VLAN to interface"
+  community.network.icx_config:
+    lines:
+      - "vlan {{ vlan_id }}"
+      - "  untagged ethe {{ interface_name }}"
+    match: line

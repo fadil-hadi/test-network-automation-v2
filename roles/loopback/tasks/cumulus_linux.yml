@@ -1,0 +1,10 @@
+---
+- name: "[Cumulus Linux] Configure loopback alias interfaces via NCLU"
+  when: loopback_interfaces is defined
+  loop: "{{ loopback_interfaces | default([]) }}"
+  loop_control:
+    label: "lo{{ item.id }}"
+  community.network.nclu:
+    commands:
+      - "add loopback lo{{ item.id }} ip address {{ item.ip }}/{{ item.mask }}"
+    commit: true

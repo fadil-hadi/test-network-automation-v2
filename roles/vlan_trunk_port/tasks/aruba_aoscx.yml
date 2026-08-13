@@ -1,0 +1,7 @@
+---
+- name: "[Aruba AOS-CX] Configure trunk port allowed VLANs"
+  arubanetworks.aoscx.aoscx_l2_interface:
+    interface: "{{ interface_name }}"
+    vlan_mode: trunk
+    vlan_trunks: "{{ trunk_vlan_list.split(',') }}"
+    state: create

@@ -1,0 +1,7 @@
+---
+- name: "[Aruba AOS-CX] Set interface to access mode and assign VLAN"
+  arubanetworks.aoscx.aoscx_l2_interface:
+    interface: "{{ interface_name }}"
+    vlan_mode: access
+    vlan_access: "{{ vlan_id }}"
+    state: create

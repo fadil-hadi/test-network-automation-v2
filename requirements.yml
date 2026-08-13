@@ -1,0 +1,10 @@
+---
+# Ansible Galaxy collections required for this project
+# Install with: ansible-galaxy collection install -r requirements.yml
+collections:
+  - name: community.network
+    version: ">=4.0.0"
+  - name: arubanetworks.aoscx
+    version: ">=4.0.0"
+  - name: ansible.netcommon
+    version: ">=4.0.0"

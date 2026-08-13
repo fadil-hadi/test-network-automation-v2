@@ -1,0 +1,18 @@
+---
+# ============================================================
+# ANSIBLE VAULT — This file MUST be encrypted before commit
+# Run: ansible-vault encrypt inventory/group_vars/all/vault.yml
+# ============================================================
+
+# Device local credentials
+vault_local_username: "FILL_USERNAME"
+vault_local_password: "FILL_PASSWORD"
+
+# SNMP
+vault_snmp_community_ro: "FILL_RO_COMMUNITY"
+vault_snmp_community_rw: "FILL_RW_COMMUNITY"
+vault_snmp_trap_host: "FILL_SNMP_TRAP_HOST"
+
+# NTP authentication key (if used)
+vault_ntp_key_id: 1
+vault_ntp_key_value: "FILL_NTP_KEY"

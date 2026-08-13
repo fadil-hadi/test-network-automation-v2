@@ -1,0 +1,12 @@
+---
+- name: "[Huawei CE] Configure loopback interfaces"
+  when: loopback_interfaces is defined
+  loop: "{{ loopback_interfaces | default([]) }}"
+  loop_control:
+    label: "LoopBack{{ item.id }}"
+  community.network.ce_config:
+    lines:
+      - "interface LoopBack{{ item.id }}"
+      - "  description {{ item.description }}"
+      - "  ip address {{ item.ip }} {{ item.mask }}"
+    match: line

@@ -1,0 +1,11 @@
+---
+- name: "[Aruba AOS-CX] Configure VLAN interface (SVI)"
+  when: vlan_interfaces is defined
+  loop: "{{ vlan_interfaces | default([]) }}"
+  loop_control:
+    label: "VLAN{{ item.vlan_id }}"
+  arubanetworks.aoscx.aoscx_l3_interface:
+    interface: "vlan{{ item.vlan_id }}"
+    ipv4: "{{ item.ip }}/{{ item.prefix_length }}"
+    description: "{{ item.description }}"
+    state: create

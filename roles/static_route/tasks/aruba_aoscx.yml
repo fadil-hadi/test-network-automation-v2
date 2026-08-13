@@ -1,0 +1,12 @@
+---
+- name: "[Aruba AOS-CX] Add static routes"
+  when: static_routes is defined
+  loop: "{{ static_routes | default([]) }}"
+  loop_control:
+    label: "Route to {{ item.destination }}"
+  arubanetworks.aoscx.aoscx_static_routes:
+    vrf_name: default
+    prefix: "{{ item.destination }}/{{ item.prefix_length }}"
+    next_hops:
+      - ip_address: "{{ item.nexthop }}"
+    state: create

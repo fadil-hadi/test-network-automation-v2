@@ -1,0 +1,8 @@
+---
+# DC/DRC Core Switches — Huawei S-Series
+# HIGH RISK — push after spine
+ansible_network_os: community.network.ce
+ansible_connection: network_cli
+device_series: "huawei_vrp_s"
+device_location: "DC/DRC"
+device_role: "core"

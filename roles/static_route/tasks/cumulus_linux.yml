@@ -1,0 +1,10 @@
+---
+- name: "[Cumulus Linux] Add static routes via NCLU"
+  when: static_routes is defined
+  loop: "{{ static_routes | default([]) }}"
+  loop_control:
+    label: "Route to {{ item.destination }}"
+  community.network.nclu:
+    commands:
+      - "add routing route {{ item.destination }} {{ item.nexthop }}"
+    commit: true

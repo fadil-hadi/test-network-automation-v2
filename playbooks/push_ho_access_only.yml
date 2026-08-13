@@ -1,0 +1,16 @@
+---
+# ============================================================
+# Push to HO Access switches only
+# Use for initial testing and UAT validation
+# ============================================================
+- name: "Push to HO Access Switches only"
+  hosts: huawei_ho_access
+  gather_facts: false
+  serial: 5
+  roles:
+    - credentials
+    - hardening
+    - access
+    - syslog
+    - snmp
+    - ntp

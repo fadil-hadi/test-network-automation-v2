@@ -1,0 +1,6 @@
+---
+- name: "[Brocade ICX] Configure syslog destination"
+  community.network.icx_config:
+    lines:
+      - "logging host {{ syslog_server }}"
+      - "logging facility {{ syslog_facility }}"

@@ -1,0 +1,7 @@
+---
+# HO Management Switch — Huawei S-Series
+ansible_network_os: community.network.ce
+ansible_connection: network_cli
+device_series: "huawei_vrp_s"
+device_location: "HO"
+device_role: "management"
