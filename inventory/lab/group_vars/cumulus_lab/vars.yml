@@ -4,6 +4,7 @@ ansible_connection: ssh
 ansible_user: "{{ vault_local_username }}"
 ansible_password: "{{ vault_local_password }}"
 ansible_become: true
+ansible_become_password: "{{ vault_local_password }}"
 device_series: "cumulus_linux"
 device_location: "LAB"
 device_role: "lab-datacenter-standin"
