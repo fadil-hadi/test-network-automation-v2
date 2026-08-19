@@ -10,13 +10,13 @@
 # ============================================================
 
 [cumulus_lab]
-lab-cumulus-01  ansible_host=FILL_LAB_IP  # Cumulus VX/Linux — spine stand-in
-lab-cumulus-02  ansible_host=FILL_LAB_IP  # Cumulus VX/Linux — leaf stand-in
+lab-cumulus-01  ansible_host=10.201.9.11  # Cumulus VX/Linux — spine stand-in
+#lab-cumulus-02  ansible_host=FILL_LAB_IP  # Cumulus VX/Linux — leaf stand-in
 
-[brocade_lab]
-lab-icx-01  ansible_host=FILL_LAB_IP  # Brocade/Ruckus ICX 7150 — access stand-in
-lab-ces-01  ansible_host=FILL_LAB_IP  # Brocade CES 2000 — access stand-in
+#[brocade_lab]
+#lab-icx-01  ansible_host=FILL_LAB_IP  # Brocade/Ruckus ICX 7150 — access stand-in
+#lab-ces-01  ansible_host=FILL_LAB_IP  # Brocade CES 2000 — access stand-in
 
 [lab_all:children]
 cumulus_lab
-brocade_lab
+#brocade_lab
