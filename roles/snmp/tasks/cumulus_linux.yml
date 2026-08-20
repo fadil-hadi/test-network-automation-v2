@@ -9,10 +9,10 @@
   become: true
   changed_when: true
  
-- name: "[Cumulus Linux] Configure SNMP user-name (NVUE)"
-  ansible.builtin.command: "nv set system snmp-server username {{ vault_snmp_community_ro }}"
-  become: true
-  changed_when: true
+#- name: "[Cumulus Linux] Configure SNMP user-name (NVUE)"
+#  ansible.builtin.command: "nv set system snmp-server username {{ vault_snmp_community_ro }}"
+#  become: true
+#  changed_when: true
 
 - name: "[Cumulus Linux] Configure SNMP trap destination (NVUE)"
   ansible.builtin.command: "nv set system snmp-server trap-destination {{ vault_snmp_trap_host }} community-password {{ vault_snmp_community_ro }} vrf mgmt"
