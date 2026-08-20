@@ -13,11 +13,7 @@
   ansible.builtin.command: "nv set system snmp-server trap-destination {{ vault_snmp_trap_host }} community-password {{ vault_snmp_community_ro }}"
   become: true
   changed_when: true
-<<<<<<< HEAD
 
-=======
-  
->>>>>>> c117e9099112180d35d75a337469263129a6b65d
 - name: "[Cumulus Linux] Apply NVUE configuration"
   ansible.builtin.command: "nv config apply -y"
   become: true
