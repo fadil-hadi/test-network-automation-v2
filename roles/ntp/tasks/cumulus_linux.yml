@@ -1,16 +1,14 @@
 ---
-- name: "[Cumulus Linux] Enable SNMP server (NVUE)"
-  ansible.builtin.command: "nv set system snmp-server state enabled"
+- name: "[Cumulus Linux] Set NTP VRF (NVUE, 5.15+ syntax)"
+  ansible.builtin.command: "nv set system ntp vrf mgmt"
   become: true
   changed_when: true
 
-- name: "[Cumulus Linux] Configure SNMP read-only community (NVUE)"
-  ansible.builtin.command: "nv set system snmp-server readonly-community {{ vault_snmp_community_ro }}"
-  become: true
-  changed_when: true
-
-- name: "[Cumulus Linux] Configure SNMP trap destination (NVUE)"
-  ansible.builtin.command: "nv set system snmp-server trap-destination {{ vault_snmp_trap_host }}"
+- name: "[Cumulus Linux] Add NTP servers (NVUE, 5.15+ syntax)"
+  loop:
+    - "{{ ntp_primary }}"
+    - "{{ ntp_secondary }}"
+  ansible.builtin.command: "nv set system ntp server {{ item }}"
   become: true
   changed_when: true
 
