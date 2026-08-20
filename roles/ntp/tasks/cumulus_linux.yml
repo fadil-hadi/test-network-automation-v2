@@ -1,19 +1,20 @@
 ---
-- name: "[Cumulus Linux] Configure chrony NTP servers"
-  ansible.builtin.lineinfile:
-    path: /etc/chrony/chrony.conf
-    create: true
-    regexp: "^server {{ item }}"
-    line: "server {{ item }} iburst"
-    mode: "0644"
-  loop:
-    - "{{ ntp_primary }}"
-    - "{{ ntp_secondary }}"
+- name: "[Cumulus Linux] Enable SNMP server (NVUE)"
+  ansible.builtin.command: "nv set system snmp-server state enabled"
   become: true
+  changed_when: true
 
-- name: "[Cumulus Linux] Restart chrony"
-  ansible.builtin.systemd:
-    name: chrony
-    state: restarted
-    enabled: true
+- name: "[Cumulus Linux] Configure SNMP read-only community (NVUE)"
+  ansible.builtin.command: "nv set system snmp-server readonly-community {{ vault_snmp_community_ro }}"
   become: true
+  changed_when: true
+
+- name: "[Cumulus Linux] Configure SNMP trap destination (NVUE)"
+  ansible.builtin.command: "nv set system snmp-server trap-destination {{ vault_snmp_trap_host }}"
+  become: true
+  changed_when: true
+
+- name: "[Cumulus Linux] Apply NVUE configuration"
+  ansible.builtin.command: "nv config apply"
+  become: true
+  changed_when: true
