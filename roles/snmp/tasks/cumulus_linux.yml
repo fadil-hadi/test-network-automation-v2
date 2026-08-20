@@ -10,11 +10,11 @@
   changed_when: true
 
 - name: "[Cumulus Linux] Configure SNMP trap destination (NVUE)"
-  ansible.builtin.command: "nv set system snmp-server trap-destination {{ vault_snmp_trap_host }}"
+  ansible.builtin.command: "nv set system snmp-server trap-destination {{ vault_snmp_trap_host }} community-password {{ vault_snmp_community_ro }}"
   become: true
   changed_when: true
-  
-  - name: "[Cumulus Linux] Apply NVUE configuration"
+
+- name: "[Cumulus Linux] Apply NVUE configuration"
   ansible.builtin.command: "nv config apply -y"
   become: true
   changed_when: true
