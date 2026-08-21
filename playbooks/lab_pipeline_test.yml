@@ -21,9 +21,9 @@
   roles:
     - credentials
     - hardening
+    - snmp
     - access
     - syslog
-    - snmp
     - ntp
     - vlan
     - vlan_access_port
