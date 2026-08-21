@@ -25,12 +25,12 @@
     - access
     - syslog
     - ntp
-    - vlan
-    - vlan_access_port
-    - vlan_trunk_port
-    - ip_interface
-    - loopback
-    - static_route
+#    - vlan
+#    - vlan_access_port
+#    - vlan_trunk_port
+#    - ip_interface
+#    - loopback
+#    - static_route
 
 - name: "Lab — Brocade CES/ICX (access stand-in)"
   hosts: brocade_lab
@@ -43,6 +43,6 @@
     - syslog
     - snmp
     - ntp
-    - vlan
-    - vlan_access_port
-    - vlan_trunk_port
+#    - vlan
+#    - vlan_access_port
+#    - vlan_trunk_port
