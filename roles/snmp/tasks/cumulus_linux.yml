@@ -19,7 +19,15 @@
   become: true
   changed_when: true
 
+#- name: "[Cumulus Linux] Apply NVUE configuration"
+#  ansible.builtin.command: "nv config apply -y"
+#  become: true
+#  changed_when: true
+
 - name: "[Cumulus Linux] Apply NVUE configuration"
-  ansible.builtin.command: "nv config apply -y"
-  become: true
+  ansible.builtin.command: nv config apply --assume-yes
   changed_when: true
+  register: nvue_apply_result
+  retries: 2
+  delay: 5
+  until: nvue_apply_result is succeeded
