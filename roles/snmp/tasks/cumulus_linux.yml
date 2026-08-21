@@ -5,7 +5,7 @@
   changed_when: true
 
 - name: "[Cumulus Linux] Configure SNMP read-only community (NVUE)"
-  ansible.builtin.command: "nv set system snmp-server readonly-community {{ vault_snmp_community_ro }}"
+  ansible.builtin.command: "nv set system snmp-server readonly-community {{ vault_snmp_community_ro }} access any"
   become: true
   changed_when: true
  
