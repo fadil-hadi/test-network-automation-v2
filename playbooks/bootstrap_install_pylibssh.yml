@@ -2,7 +2,7 @@
 - hosts: localhost
   gather_facts: false
   tasks:
-    - name: Install ansible-pylibssh for legacy SSH device support
+    - name: Install pexpect (pure Python, no compiler needed)
       ansible.builtin.pip:
-        name: ansible-pylibssh
+        name: pexpect
         extra_args: --break-system-packages
