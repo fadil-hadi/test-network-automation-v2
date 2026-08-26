@@ -1,0 +1,13 @@
+---
+# Candidate connection plugin — community.network's ICX cliconf/terminal
+# plugins are the closest available match (shared Brocade CLI driver
+# lineage per community tooling), but NOT confirmed for IronWare/CER.
+# If connection fails, this is the first thing to revisit.
+ansible_network_os: community.network.icx
+ansible_connection: network_cli
+ansible_user: "{{ vault_local_username }}"
+ansible_password: "{{ vault_local_password }}"
+ansible_become: false
+device_series: "brocade_ironware_cer"
+device_location: "LAB"
+device_role: "lab-ironware-standin"
