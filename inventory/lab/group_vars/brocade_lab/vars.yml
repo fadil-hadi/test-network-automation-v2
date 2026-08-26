@@ -1,5 +1,5 @@
 ---
-# Brocade/Ruckus ICX & CES (FastIron) lab devices
+# Brocade/Ruckus ICX & CER (FastIron) lab devices
 ansible_network_os: community.network.icx
 ansible_connection: network_cli
 ansible_user: "{{ vault_local_username }}"
