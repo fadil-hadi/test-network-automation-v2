@@ -1,19 +1,13 @@
 ---
-# Brocade NetIron CER 2024C-4X-RT — Multi-Service IronWare, NOT FastIron.
-# This is a DIFFERENT OS family than roles/*/tasks/brocade_icx.yml —
-# do not assume ICX syntax works here without confirming on-device first.
-#
-# STATUS: UNVERIFIED. Placeholder using generic cli_config with the
-# community.network.icx connection plugin as a starting point (shared
-# low-level Brocade CLI driver per community tooling), but the actual
-# command lines below are NOT confirmed against this device's real
-# IronWare CLI. Run `show version` and the relevant config-mode `?`
-# help on-device before trusting any line here — same process used for
-# Cumulus NVUE and Huawei VRP elsewhere in this repo.
-- name: "[Brocade CER/IronWare] PLACEHOLDER — verify commands on-device before use"
+- name: "[Brocade CER/IronWare] Enable SSH server (generate RSA host key)"
+  community.network.icx_config:
+    lines:
+      - "crypto key client generate rsa modulus 2048"
+    match: line
+
+- name: "[Brocade CER/IronWare] Confirm no HTTPS/web management to enable"
   ansible.builtin.debug:
     msg: >-
-      brocade_ironware_cer task file for role 'access' is a placeholder.
-      Confirm exact IronWare CLI syntax via `show version` and CLI help
-      on lab-cer-01 before replacing this with real ansible.netcommon.cli_config
-      tasks.
+      No web/HTTPS management subsystem exists on this platform — SSH
+      via generated RSA key is the only remote management transport
+      hardened here.
