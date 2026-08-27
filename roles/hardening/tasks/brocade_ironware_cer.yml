@@ -1,9 +1,16 @@
 ---
-- name: "[Brocade CER/IronWare] Disable Telnet server"
-  community.network.icx_config:
-    lines:
-      - "no telnet server"
-    match: line
+- name: "[Brocade CER/IronWare] Disable Telnet server (legacy-SSH workaround via expect)"
+  ansible.builtin.expect:
+    command: >-
+      ssh -o KexAlgorithms=+diffie-hellman-group14-sha1,diffie-hellman-group1-sha1
+      -o HostKeyAlgorithms=+ssh-rsa -o Ciphers=+aes128-cbc -o StrictHostKeyChecking=no
+      {{ ansible_user }}@{{ ansible_host }}
+    responses:
+      (?i)password: "{{ ansible_password }}"
+      "[>#]\\s*$": "enable\rconfigure terminal\rno telnet server\rexit\rexit\r"
+    timeout: 20
+  changed_when: true
+  delegate_to: localhost
 
 - name: "[Brocade CER/IronWare] Confirm no plain-HTTP/web management exists"
   ansible.builtin.debug:

@@ -1,7 +1,13 @@
 ---
-- name: "[Brocade CER/IronWare] Configure SNMP community and trap host"
-  community.network.icx_config:
-    lines:
-      - "snmp-server community {{ vault_snmp_community_ro }} ro"
-      - "snmp-server host {{ vault_snmp_trap_host }} {{ vault_snmp_community_ro }}"
-    match: line
+- name: "[Brocade CER/IronWare] Configure SNMP community and trap host (legacy-SSH workaround via expect)"
+  ansible.builtin.expect:
+    command: >-
+      ssh -o KexAlgorithms=+diffie-hellman-group14-sha1,diffie-hellman-group1-sha1
+      -o HostKeyAlgorithms=+ssh-rsa -o Ciphers=+aes128-cbc -o StrictHostKeyChecking=no
+      {{ ansible_user }}@{{ ansible_host }}
+    responses:
+      (?i)password: "{{ ansible_password }}"
+      "[>#]\\s*$": "enable\rconfigure terminal\rsnmp-server community {{ vault_snmp_community_ro }} ro\rsnmp-server host {{ vault_snmp_trap_host }} {{ vault_snmp_community_ro }}\rexit\rexit\r"
+    timeout: 20
+  changed_when: true
+  delegate_to: localhost

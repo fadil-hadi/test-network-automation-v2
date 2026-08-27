@@ -1,9 +1,16 @@
 ---
-- name: "[Brocade CER/IronWare] Enable SSH server (generate RSA host key)"
-  community.network.icx_config:
-    lines:
-      - "crypto key client generate rsa modulus 2048"
-    match: line
+- name: "[Brocade CER/IronWare] Enable SSH server via RSA host key (legacy-SSH workaround via expect)"
+  ansible.builtin.expect:
+    command: >-
+      ssh -o KexAlgorithms=+diffie-hellman-group14-sha1,diffie-hellman-group1-sha1
+      -o HostKeyAlgorithms=+ssh-rsa -o Ciphers=+aes128-cbc -o StrictHostKeyChecking=no
+      {{ ansible_user }}@{{ ansible_host }}
+    responses:
+      (?i)password: "{{ ansible_password }}"
+      "[>#]\\s*$": "enable\rconfigure terminal\rcrypto key client generate rsa modulus 2048\rexit\rexit\r"
+    timeout: 30
+  changed_when: true
+  delegate_to: localhost
 
 - name: "[Brocade CER/IronWare] Confirm no HTTPS/web management to enable"
   ansible.builtin.debug:
