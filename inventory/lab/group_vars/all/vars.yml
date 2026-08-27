@@ -6,8 +6,8 @@ syslog_port: 50000
 syslog_facility: "local7"
 syslog_severity: "informational"
 
-ntp_primary: "0.id.pool.ntp.org"
-ntp_secondary: "1.id.pool.ntp.org"
+ntp_primary: "1.1.11.111"
+ntp_secondary: "1.1.12.111"
 ntp_timezone: "Asia/Jakarta"
 
 ssh_version: 2
