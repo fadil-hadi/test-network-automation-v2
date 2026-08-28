@@ -6,7 +6,7 @@
       -o HostKeyAlgorithms=+ssh-rsa -o Ciphers=+aes128-cbc -o StrictHostKeyChecking=no
       {{ ansible_user }}@{{ ansible_host }}
     responses:
-      (?i)password:
+      "[Pp]assword:\\s*$":
         - "{{ ansible_password }}"
       "[>#]\\s*$":
         - "enable"

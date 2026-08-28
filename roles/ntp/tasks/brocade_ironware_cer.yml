@@ -6,8 +6,18 @@
       -o HostKeyAlgorithms=+ssh-rsa -o Ciphers=+aes128-cbc -o StrictHostKeyChecking=no
       {{ ansible_user }}@{{ ansible_host }}
     responses:
-      (?i)password: "{{ ansible_password }}"
-      "[>#]\\s*$": "enable\rconfigure terminal\rntp\rserver {{ ntp_primary }}\rserver {{ ntp_secondary }}\rexit\rexit\rexit\r"
+      "[Pp]assword:\\s*$":
+        - "{{ ansible_password }}"
+      "[>#]\\s*$":
+        - "enable"
+        - "configure terminal"
+        - "ntp"
+        - "server {{ ntp_primary }}"
+        - "server {{ ntp_secondary }}"
+        - "exit"
+        - "exit"
+        - "exit"
+        - "exit"
     timeout: 20
   changed_when: true
   delegate_to: localhost
