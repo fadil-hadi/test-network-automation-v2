@@ -6,8 +6,16 @@
       -o HostKeyAlgorithms=+ssh-rsa -o Ciphers=+aes128-cbc -o StrictHostKeyChecking=no
       {{ ansible_user }}@{{ ansible_host }}
     responses:
-      (?i)password: "{{ ansible_password }}"
-      "[>#]\\s*$": "enable\rconfigure terminal\rsnmp-server community {{ vault_snmp_community_ro }} ro\rsnmp-server host {{ vault_snmp_trap_host }} {{ vault_snmp_community_ro }}\rexit\rexit\rexit\r"
+      (?i)password:
+        - "{{ ansible_password }}"
+      "[>#]\\s*$":
+        - "enable"
+        - "configure terminal"
+        - "snmp-server community {{ vault_snmp_community_ro }} ro"
+        - "snmp-server host {{ vault_snmp_trap_host }} version v2c {{ vault_snmp_community_ro }}"
+        - "exit"
+        - "exit"
+        - "exit"
     timeout: 20
   changed_when: true
   delegate_to: localhost
