@@ -6,12 +6,18 @@
       -o HostKeyAlgorithms=+ssh-rsa -o Ciphers=+aes128-cbc -o StrictHostKeyChecking=no
       {{ ansible_user }}@{{ ansible_host }}
     responses:
-      (?i)password: "{{ ansible_password }}"
-      "[>#]\\s*$": "enable\rconfigure terminal\rno telnet server\rexit\rexit\rexit\r"
+      (?i)password:
+        - "{{ ansible_password }}"
+      "[>#]\\s*$":
+        - "enable"
+        - "configure terminal"
+        - "no telnet server"
+        - "exit"
+        - "exit"
+        - "exit"
     timeout: 20
   changed_when: true
   delegate_to: localhost
-
 - name: "[Brocade CER/IronWare] Confirm no plain-HTTP/web management exists"
   ansible.builtin.debug:
     msg: >-

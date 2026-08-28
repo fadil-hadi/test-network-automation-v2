@@ -6,8 +6,15 @@
       -o HostKeyAlgorithms=+ssh-rsa -o Ciphers=+aes128-cbc -o StrictHostKeyChecking=no
       {{ ansible_user }}@{{ ansible_host }}
     responses:
-      (?i)password: "{{ ansible_password }}"
-      "[>#]\\s*$": "enable\rconfigure terminal\rlogging host {{ syslog_server }}\rlogging facility {{ syslog_facility }}\rexit\rexit\rexit\r"
+      (?i)password:
+        - "{{ ansible_password }}"
+      "[>#]\\s*$":
+        - "enable"
+        - "configure terminal"
+        - "logging host {{ syslog_server }}"
+        - "exit"
+        - "exit"
+        - "exit"
     timeout: 20
   changed_when: true
   delegate_to: localhost

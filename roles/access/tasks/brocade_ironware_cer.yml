@@ -6,8 +6,15 @@
       -o HostKeyAlgorithms=+ssh-rsa -o Ciphers=+aes128-cbc -o StrictHostKeyChecking=no
       {{ ansible_user }}@{{ ansible_host }}
     responses:
-      (?i)password: "{{ ansible_password }}"
-      "[>#]\\s*$": "enable\rconfigure terminal\rcrypto key client generate rsa modulus 2048\rexit\rexit\rexit\r"
+      (?i)password:
+        - "{{ ansible_password }}"
+      "[>#]\\s*$":
+        - "enable"
+        - "configure terminal"
+        - "crypto key client generate rsa modulus 2048"
+        - "exit"
+        - "exit"
+        - "exit"
     timeout: 30
   changed_when: true
   delegate_to: localhost
