@@ -9,3 +9,5 @@ device_series: "brocade_icx"
 device_location: "LAB"
 device_role: "lab-access-standin"
 ansible_ssh_common_args: "{{ legacy_ssh_crypto_args }}"
+ansible_network_cli_ssh_type: libssh
+
