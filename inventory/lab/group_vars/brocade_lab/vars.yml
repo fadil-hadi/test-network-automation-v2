@@ -4,6 +4,7 @@ ansible_network_os: community.network.icx
 ansible_connection: network_cli
 ansible_network_cli_ssh_type: libssh
 ansible_libssh_key_exchange_algorithms: "+diffie-hellman-group1-sha1"
+ansible_libssh_hostkeys: "+ssh-rsa"
 ansible_user: "{{ vault_cer_username }}"
 ansible_password: "{{ vault_local_password }}"
 ansible_become: false
