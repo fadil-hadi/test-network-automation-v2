@@ -2,9 +2,7 @@
 - name: "[Brocade CER/IronWare] Configure syslog destination (legacy-SSH workaround via expect)"
   ansible.builtin.expect:
     command: >-
-      ssh -o KexAlgorithms=+diffie-hellman-group14-sha1,diffie-hellman-group1-sha1
-      -o HostKeyAlgorithms=+ssh-rsa -o Ciphers=+aes128-cbc -o StrictHostKeyChecking=no
-      {{ ansible_user }}@{{ ansible_host }}
+      ssh {{ legacy_ssh_crypto_args }} {{ ansible_user }}@{{ ansible_host }}
     responses:
       "[Pp]assword:\\s*$":
         - "{{ ansible_password }}"
