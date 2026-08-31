@@ -1,7 +1,8 @@
 # FIF Network Automation — Oxidized LAB router.db
 # Proves the Oxidized -> Git backup/diff/commit flow before go-live.
 # Format: hostname:ip:model
-lab-cumulus-01:10.201.9.11:cumulus
-#lab-cumulus-02:FILL_LAB_IP:cumulus
-#lab-icx-01:FILL_LAB_IP:icx
-#lab-ces-01:FILL_LAB_IP:icx
+# windriver-cumulus
+Cumulus-Windriver:10.201.9.10:cumulus:distribute
+
+# CER
+CER:10.201.9.12:ironware:core
