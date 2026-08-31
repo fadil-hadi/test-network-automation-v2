@@ -14,7 +14,7 @@ lab-cumulus-01  ansible_host=10.201.9.11  # Cumulus VX/Linux — spine stand-in
 #lab-cumulus-02  ansible_host=FILL_LAB_IP  # Cumulus VX/Linux — leaf stand-in
 
 [brocade_lab]
-#lab-icx-01  ansible_host=FILL_LAB_IP  # Brocade/Ruckus ICX 7150 — access stand-in
+lab-icx-01  ansible_host=10.201.9.13  # Brocade/Ruckus ICX 7150 — access stand-in
 
 [brocade_cer_lab]
 lab-cer-01  ansible_host=10.201.9.12  # Brocade NetIron CER 2024C-4X-RT — IronWare, not FastIron
