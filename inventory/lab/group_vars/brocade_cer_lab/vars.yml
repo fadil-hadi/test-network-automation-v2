@@ -11,3 +11,4 @@ ansible_become: false
 device_series: "brocade_ironware_cer"
 device_location: "LAB"
 device_role: "lab-ironware-standin"
+ansible_ssh_common_args: "{{ legacy_ssh_crypto_args }}"
