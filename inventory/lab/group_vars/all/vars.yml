@@ -5,6 +5,7 @@ syslog_server: "10.1.25.231"
 syslog_port: 50000
 syslog_facility: "local7"
 syslog_severity: "informational"
+sshkey: "-o ConnectTimeout=10 KexAlgorithms=+diffie-hellman-group14-sha1,diffie-hellman-group1-sha1-o HostKeyAlgorithms=+ssh-rsa -o Ciphers=+aes128-cbc -o StrictHostKeyChecking=no"
 
 ntp_primary: "1.1.11.111"
 ntp_secondary: "1.1.12.111"

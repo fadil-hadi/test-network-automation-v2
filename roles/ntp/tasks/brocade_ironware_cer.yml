@@ -2,9 +2,7 @@
 - name: "[Brocade CER/IronWare] Configure NTP servers (legacy-SSH workaround via expect)"
   ansible.builtin.expect:
     command: >-
-#      ssh -o KexAlgorithms=+diffie-hellman-group14-sha1,diffie-hellman-group1-sha1
-#      -o HostKeyAlgorithms=+ssh-rsa -o Ciphers=+aes128-cbc -o StrictHostKeyChecking=no
-      ssh {{ ansible_user }}@{{ ansible_host }}
+      ssh {{sshkey}} {{ ansible_user }}@{{ ansible_host }}
     responses:
       "[Pp]assword:\\s*$":
         - "{{ ansible_password }}"
