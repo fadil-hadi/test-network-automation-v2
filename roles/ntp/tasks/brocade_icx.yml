@@ -1,8 +1,9 @@
 ---
-# Verify exact NTP/SNTP keyword against the target FastIron firmware version.
-- name: "[Brocade ICX] Configure NTP/SNTP servers"
+- name: "[Brocade ICX] Configure NTP servers"
   community.network.icx_config:
     lines:
-      - "sntp server {{ ntp_primary }}"
-      - "sntp server {{ ntp_secondary }}"
-      - "clock timezone Asia Jakarta"
+      - "ntp"
+      - "server {{ ntp_primary }}"
+      - "server {{ ntp_secondary }}"
+      - "clock timezone gmt+07"
+

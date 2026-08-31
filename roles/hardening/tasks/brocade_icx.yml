@@ -7,4 +7,5 @@
 - name: "[Brocade ICX] Disable HTTP server"
   community.network.icx_config:
     lines:
-      - "no ip http server"
+      - "no web-management http"
+
