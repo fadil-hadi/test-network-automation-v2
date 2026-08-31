@@ -23,3 +23,6 @@ lab-cer-01  ansible_host=10.201.9.12  # Brocade NetIron CER 2024C-4X-RT — Iron
 cumulus_lab
 brocade_lab
 brocade_cer_lab
+
+[oxidized_host]
+oxidized-jenkins  ansible_host=192.168.3.116 #oxidized backup
