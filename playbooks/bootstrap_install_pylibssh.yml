@@ -2,7 +2,13 @@
 - hosts: localhost
   gather_facts: false
   tasks:
-    - name: Install pexpect (pure Python, no compiler needed)
+    - name: Install pexpect (for legacy-SSH expect workaround, CER role)
       ansible.builtin.pip:
         name: pexpect
         extra_args: --break-system-packages
+
+    - name: Install ansible-pylibssh (libssh backend for network_cli, ICX role)
+      ansible.builtin.pip:
+        name: ansible-pylibssh
+        extra_args: --break-system-packages
+
