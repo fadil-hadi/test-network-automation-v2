@@ -2,9 +2,10 @@
 # Brocade/Ruckus ICX & CER (FastIron) lab devices
 ansible_network_os: community.network.icx
 ansible_connection: network_cli
-ansible_user: "{{ vault_local_username }}"
+ansible_user: "{{ vault_cer_username }}"
 ansible_password: "{{ vault_local_password }}"
 ansible_become: false
 device_series: "brocade_icx"
 device_location: "LAB"
 device_role: "lab-access-standin"
+ansible_ssh_common_args: "{{ legacy_ssh_crypto_args }}"
