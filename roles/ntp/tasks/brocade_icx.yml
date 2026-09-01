@@ -15,6 +15,7 @@
         - "exit"
         - "clock timezone gmt+07"
         - "exit"
+        - "exit"
     timeout: 20
   changed_when: true
   delegate_to: localhost

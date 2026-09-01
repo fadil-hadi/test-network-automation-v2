@@ -1,6 +1,20 @@
 ---
 - name: "[Brocade ICX] Configure SNMP"
-  community.network.icx_config:
-    lines:
-      - "snmp-server community {{ vault_snmp_community_ro }} ro"
-      - "snmp-server host {{ vault_snmp_trap_host }} {{ vault_snmp_community_ro }}"
+  ansible.builtin.expect:
+    command: >-
+      ssh {{ icx_ssh_crypto_args }} {{ ansible_user }}@{{ ansible_host }}
+    responses:
+      "[Pp]assword:\\s*$":
+        - "{{ ansible_password }}"
+      "[>#]\\s*$":
+        - "enable"
+        - "configure terminal"
+        - "snmp-server community {{ vault_snmp_community_ro }} ro"
+        - "snmp-server host {{ vault_snmp_trap_host }} {{ vault_snmp_community_ro }}"
+        - "exit"
+        - "exit"
+        - "exit"
+    timeout: 20
+  changed_when: true
+  delegate_to: localhost
+
