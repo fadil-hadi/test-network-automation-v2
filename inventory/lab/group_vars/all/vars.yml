@@ -13,6 +13,13 @@ legacy_ssh_crypto_args: >-
   -o Ciphers=+aes128-cbc
   -o StrictHostKeyChecking=no
 
+icx_ssh_crypto_args: >-
+  -o ConnectTimeout=10
+  -o KexAlgorithms=+diffie-hellman-group1-sha1
+  -o HostKeyAlgorithms=+ssh-rsa
+  -o MACs=+hmac-sha1
+  -o StrictHostKeyChecking=no
+
 ntp_primary: "1.1.11.111"
 ntp_secondary: "1.1.12.111"
 ntp_timezone: "Asia/Jakarta"

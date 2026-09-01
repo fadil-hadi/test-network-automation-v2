@@ -1,9 +1,21 @@
 ---
 - name: "[Brocade ICX] Configure NTP servers"
-  community.network.icx_config:
-    lines:
-      - "ntp"
-      - "server {{ ntp_primary }}"
-      - "server {{ ntp_secondary }}"
-      - "clock timezone gmt+07"
+  ansible.builtin.expect:
+    command: >-
+      ssh {{ icx_ssh_crypto_args }} {{ ansible_user }}@{{ ansible_host }}
+    responses:
+      "[Pp]assword:\\s*$":
+        - "{{ ansible_password }}"
+      "[>#]\\s*$":
+        - "enable"
+        - "configure terminal"
+        - "ntp"
+        - "server {{ ntp_primary }}"
+        - "server {{ ntp_secondary }}"
+        - "exit"
+        - "clock timezone gmt+07"
+        - "exit"
+    timeout: 20
+  changed_when: true
+  delegate_to: localhost
 

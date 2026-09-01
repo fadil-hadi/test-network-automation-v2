@@ -1,11 +1,19 @@
 ---
-- name: "[Brocade ICX] Disable Telnet server"
-  community.network.icx_config:
-    lines:
-      - "no telnet server"
-
-- name: "[Brocade ICX] Disable HTTP server"
-  community.network.icx_config:
-    lines:
-      - "no web-management http"
+- name: "[Brocade ICX] Disable Telnet and HTTP servers"
+  ansible.builtin.expect:
+    command: >-
+      ssh {{ icx_ssh_crypto_args }} {{ ansible_user }}@{{ ansible_host }}
+    responses:
+      "[Pp]assword:\\s*$":
+        - "{{ ansible_password }}"
+      "[>#]\\s*$":
+        - "enable"
+        - "configure terminal"
+        - "no telnet server"
+        - "no web-management http"
+        - "exit"
+        - "exit"
+    timeout: 20
+  changed_when: true
+  delegate_to: localhost
 

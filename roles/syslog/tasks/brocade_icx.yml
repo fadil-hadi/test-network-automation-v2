@@ -1,6 +1,19 @@
 ---
 - name: "[Brocade ICX] Configure syslog destination"
-  community.network.icx_config:
-    lines:
-      - "logging host {{ syslog_server }}"
-      - "logging facility {{ syslog_facility }}"
+  ansible.builtin.expect:
+    command: >-
+      ssh {{ icx_ssh_crypto_args }} {{ ansible_user }}@{{ ansible_host }}
+    responses:
+      "[Pp]assword:\\s*$":
+        - "{{ ansible_password }}"
+      "[>#]\\s*$":
+        - "enable"
+        - "configure terminal"
+        - "logging host {{ syslog_server }}"
+        - "logging facility {{ syslog_facility }}"
+        - "exit"
+        - "exit"
+    timeout: 20
+  changed_when: true
+  delegate_to: localhost
+
