@@ -15,8 +15,9 @@
         mode: "0600"
       become: true
 
-    - name: "Trigger Oxidized reload"
-      ansible.builtin.uri:
-        url: "http://localhost:8888/reload"
-        method: GET
-      delegate_to: "{{ inventory_hostname }}"
+    - name: "Restart Oxidized service via systemctl"
+      ansible.builtin.systemd:
+        name: oxidized
+        state: restarted
+      become: true
+
