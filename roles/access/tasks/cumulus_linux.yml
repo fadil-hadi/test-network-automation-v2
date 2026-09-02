@@ -13,9 +13,10 @@
   ansible.builtin.command: nv config apply --assume-yes
   changed_when: true
   failed_when: false
-  register: nvue_apply_result
+  register: access_nvue_apply_result
 
 - name: "[Cumulus Linux] Wait for switch to become reachable again"
   ansible.builtin.wait_for_connection:
     delay: 5
     timeout: 60
+
