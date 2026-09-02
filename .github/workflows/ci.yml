@@ -1,0 +1,28 @@
+name: CI - Lint & Syntax Check
+
+on:
+  pull_request:
+    branches: [ staging, main ]
+  push:
+    branches: [ dev ]
+
+jobs:
+  lint-and-syntax:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install Ansible + linters
+        run: pip install --break-system-packages ansible-core ansible-lint yamllint
+      - name: Install Galaxy collections
+        run: ansible-galaxy collection install -r requirements.yml
+      - name: yamllint
+        run: yamllint -d "{extends: default, rules: {line-length: {max: 160}}}" .
+      - name: ansible-lint
+        run: ansible-lint playbooks/ roles/
+      - name: Syntax check
+        run: |
+          ansible-playbook playbooks/site.yml --syntax-check
+          ansible-playbook -i inventory/lab/hosts playbooks/lab_pipeline_test.yml --syntax-check
