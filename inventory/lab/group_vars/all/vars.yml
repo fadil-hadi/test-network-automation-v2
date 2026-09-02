@@ -1,7 +1,8 @@
 ---
 # Lab-wide variables — mirrors inventory/production/group_vars/all/vars.yml
 # so the SAME roles/playbooks run unmodified against the lab.
-syslog_server: "10.1.25.231"
+#syslog_server: "10.1.25.231"
+syslog_server: "10.1.25.254"
 syslog_port: 50000
 syslog_facility: "local7"
 syslog_severity: "informational"

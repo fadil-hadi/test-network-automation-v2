@@ -1,0 +1,10 @@
+id: "CR-LAB-003"
+description: "Update syslog server IP for lab devices"
+playbook: "playbooks/lab_pipeline_test.yml"
+affected_devices:
+- lab-icx-01
+- lab-cer-01
+risk_level: "LOW"
+status: "pending"
+requested_by: "fadil-hadi"
+requested_date: "2026-09-02"
