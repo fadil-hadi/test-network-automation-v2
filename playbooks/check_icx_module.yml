@@ -1,5 +1,5 @@
 ---
-- name: "Check — Verify ICX module availability"  
+- name: "Check — Verify ICX module availability"
   hosts: localhost
   gather_facts: false
   tasks:
