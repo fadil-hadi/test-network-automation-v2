@@ -5,6 +5,8 @@ affected_devices:
 - lab-icx-01
 - lab-cer-01
 risk_level: "LOW"
-status: "pending"
+status: "applied"
 requested_by: "fadil-hadi"
 requested_date: "2026-09-02"
+finished_date: "2026-09-02"
+git_commit: "Staging to main CR-LAB-003: update syslog server IP to 10.1.25.254"
