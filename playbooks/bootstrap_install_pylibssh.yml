@@ -21,4 +21,3 @@
       ansible.builtin.pip:
         name: ansible-pylibssh
         extra_args: --break-system-packages
-

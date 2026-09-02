@@ -3,7 +3,7 @@
   ansible.builtin.command: "nv set system syslog server {{ syslog_server }}"
   become: true
   changed_when: true
-  
+
 - name: "[Cumulus Linux] Apply NVUE configuration"
   ansible.builtin.command: "nv config apply -y"
   become: true

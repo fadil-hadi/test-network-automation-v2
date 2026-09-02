@@ -20,4 +20,3 @@
     timeout: 20
   changed_when: true
   delegate_to: localhost
-
