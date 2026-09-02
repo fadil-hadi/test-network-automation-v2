@@ -20,31 +20,10 @@ jobs:
       - name: Install Galaxy collections
         run: ansible-galaxy collection install -r requirements.yml
       - name: yamllint
-        run: |
-          cat > /tmp/yamllint-config.yml << 'YLEOF'
-          extends: default
-          rules:
-            line-length:
-              max: 160
-            document-start: disable
-            truthy: disable
-            comments-indentation: disable
-            comments: disable
-            empty-lines: disable
-            trailing-spaces: disable
-            new-line-at-end-of-file: disable
-            new-lines: disable
-            indentation:
-              indent-sequences: whatever
-          YLEOF
-          yamllint -c /tmp/yamllint-config.yml \
-            --no-warnings \
-            $(find . -name "*.yml" -not -name "vault.yml" -not -path "./.git/*")
+        run: yamllint .
       - name: ansible-lint
         run: ansible-lint playbooks/ roles/
       - name: Syntax check
         run: |
           ansible-playbook playbooks/site.yml --syntax-check
           ansible-playbook -i inventory/lab/hosts playbooks/lab_pipeline_test.yml --syntax-check
-      - name: yamllint
-        run: yamllint .
