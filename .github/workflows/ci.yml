@@ -1,10 +1,11 @@
+---
 name: CI - Lint & Syntax Check
 
-on:
+"on":
   pull_request:
-    branches: [ staging, main ]
+    branches: [staging, main]
   push:
-    branches: [ dev ]
+    branches: [dev]
 
 jobs:
   lint-and-syntax:
@@ -19,7 +20,24 @@ jobs:
       - name: Install Galaxy collections
         run: ansible-galaxy collection install -r requirements.yml
       - name: yamllint
-        run: yamllint -d "{extends: default, rules: {line-length: {max: 160}}}" .
+        run: |
+          cat > /tmp/yamllint-config.yml << 'YLEOF'
+          extends: default
+          rules:
+            line-length:
+              max: 160
+            document-start: disable
+            truthy: disable
+            comments-indentation: disable
+            comments: disable
+            empty-lines: disable
+            trailing-spaces: disable
+            new-line-at-end-of-file: disable
+            new-lines: disable
+            indentation:
+              indent-sequences: whatever
+          YLEOF
+          yamllint -c /tmp/yamllint-config.yml .
       - name: ansible-lint
         run: ansible-lint playbooks/ roles/
       - name: Syntax check

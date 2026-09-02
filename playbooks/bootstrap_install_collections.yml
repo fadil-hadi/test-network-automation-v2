@@ -1,4 +1,6 @@
-- hosts: localhost
+---
+- name: "Bootstrap — Install required Ansible collections"
+  hosts: localhost
   gather_facts: false
   tasks:
     - name: Install required Ansible collections

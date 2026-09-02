@@ -1,5 +1,6 @@
 ---
-- hosts: localhost
+- name: "Bootstrap — Install pylibssh and dependencies"
+  hosts: localhost
   gather_facts: false
   tasks:
     - name: Install system build dependencies for ansible-pylibssh
@@ -12,6 +13,7 @@
         state: present
         update_cache: true
       become: true
+
     - name: Install pexpect (for legacy-SSH expect workaround, CER role)
       ansible.builtin.pip:
         name: pexpect
@@ -21,4 +23,3 @@
       ansible.builtin.pip:
         name: ansible-pylibssh
         extra_args: --break-system-packages
-

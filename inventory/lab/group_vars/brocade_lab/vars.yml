@@ -1,3 +1,4 @@
+---
 ansible_user: "{{ vault_cer_username }}"
 ansible_password: "{{ vault_local_password }}"
 device_series: "brocade_icx"
