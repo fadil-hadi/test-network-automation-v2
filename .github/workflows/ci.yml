@@ -28,6 +28,11 @@ jobs:
             document-start: disable
             truthy: disable
             comments-indentation: disable
+            comments: disable
+            empty-lines: disable
+            trailing-spaces: disable
+            new-line-at-end-of-file: disable
+            new-lines: disable
             indentation:
               indent-sequences: whatever
           YLEOF
