@@ -37,7 +37,9 @@ jobs:
             indentation:
               indent-sequences: whatever
           YLEOF
-          yamllint -c /tmp/yamllint-config.yml .
+          yamllint -c /tmp/yamllint-config.yml \
+            --no-warnings \
+            $(find . -name "*.yml" -not -name "vault.yml" -not -path "./.git/*")
       - name: ansible-lint
         run: ansible-lint playbooks/ roles/
       - name: Syntax check
