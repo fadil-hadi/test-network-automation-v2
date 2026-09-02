@@ -1,0 +1,10 @@
+---
+# Cumulus Linux lab devices — plain SSH, not network_cli
+ansible_connection: ssh
+ansible_user: "{{ vault_oxidized_username }}"
+ansible_password: "{{ vault_oxidized_password }}"
+ansible_become: true
+ansible_become_password: "{{ vault_oxidized_password }}"
+device_series: "oxidized"
+device_location: "LAB"
+device_role: "lab-datacenter-backup-engine"

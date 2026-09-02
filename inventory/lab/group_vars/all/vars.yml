@@ -1,13 +1,27 @@
 ---
 # Lab-wide variables — mirrors inventory/production/group_vars/all/vars.yml
 # so the SAME roles/playbooks run unmodified against the lab.
-syslog_server: "FILL_LAB_SYSLOG_IP"
-syslog_port: 514
+syslog_server: "10.1.25.231"
+syslog_port: 50000
 syslog_facility: "local7"
 syslog_severity: "informational"
 
-ntp_primary: "FILL_LAB_NTP_PRIMARY_IP"
-ntp_secondary: "FILL_LAB_NTP_SECONDARY_IP"
+legacy_ssh_crypto_args: >-
+  -o ConnectTimeout=10
+  -o KexAlgorithms=+diffie-hellman-group14-sha1,diffie-hellman-group1-sha1
+  -o HostKeyAlgorithms=+ssh-rsa
+  -o Ciphers=+aes128-cbc
+  -o StrictHostKeyChecking=no
+
+icx_ssh_crypto_args: >-
+  -o ConnectTimeout=10
+  -o KexAlgorithms=+diffie-hellman-group1-sha1
+  -o HostKeyAlgorithms=+ssh-rsa
+  -o MACs=+hmac-sha1
+  -o StrictHostKeyChecking=no
+
+ntp_primary: "1.1.11.111"
+ntp_secondary: "1.1.12.111"
 ntp_timezone: "Asia/Jakarta"
 
 ssh_version: 2

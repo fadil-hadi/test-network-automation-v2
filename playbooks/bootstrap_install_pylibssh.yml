@@ -1,0 +1,24 @@
+---
+- hosts: localhost
+  gather_facts: false
+  tasks:
+    - name: Install system build dependencies for ansible-pylibssh
+      ansible.builtin.apt:
+        name:
+          - gcc
+          - build-essential
+          - libssh-dev
+          - python3-dev
+        state: present
+        update_cache: true
+      become: true
+    - name: Install pexpect (for legacy-SSH expect workaround, CER role)
+      ansible.builtin.pip:
+        name: pexpect
+        extra_args: --break-system-packages
+
+    - name: Install ansible-pylibssh (libssh backend for network_cli, ICX role)
+      ansible.builtin.pip:
+        name: ansible-pylibssh
+        extra_args: --break-system-packages
+

@@ -1,8 +1,23 @@
 ---
-# Verify exact NTP/SNTP keyword against the target FastIron firmware version.
-- name: "[Brocade ICX] Configure NTP/SNTP servers"
-  community.network.icx_config:
-    lines:
-      - "sntp server {{ ntp_primary }}"
-      - "sntp server {{ ntp_secondary }}"
-      - "clock timezone Asia Jakarta"
+- name: "[Brocade ICX] Configure NTP servers"
+  ansible.builtin.expect:
+    command: >-
+      ssh {{ icx_ssh_crypto_args }} {{ ansible_user }}@{{ ansible_host }}
+    responses:
+      "[Pp]assword:\\s*$":
+        - "{{ ansible_password }}"
+      "[>#]\\s*$":
+        - "enable"
+        - "configure terminal"
+        - "ntp"
+        - "server {{ ntp_primary }}"
+        - "server {{ ntp_secondary }}"
+        - "exit"
+        - "clock timezone gmt+07"
+        - "exit"
+        - "exit"
+        - "exit"
+    timeout: 20
+  changed_when: true
+  delegate_to: localhost
+

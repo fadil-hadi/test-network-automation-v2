@@ -1,24 +1,36 @@
 ---
-- name: "[Cumulus Linux] Configure net-snmp community and trap sink"
-  ansible.builtin.lineinfile:
-    path: /etc/snmp/snmpd.conf
-    create: true
-    regexp: "^rocommunity"
-    line: "rocommunity {{ vault_snmp_community_ro }} default"
-    mode: "0644"
+- name: "[Cumulus Linux] Enable SNMP server (NVUE)"
+  ansible.builtin.command: "nv set system snmp-server state enabled"
   become: true
+  changed_when: true
 
-- name: "[Cumulus Linux] Configure trap destination"
-  ansible.builtin.lineinfile:
-    path: /etc/snmp/snmptrapd.conf
-    create: true
-    line: "traphandle default {{ vault_snmp_trap_host }}"
-    mode: "0644"
+- name: "[Cumulus Linux] Configure SNMP read-only community (NVUE)"
+  ansible.builtin.command: "nv set system snmp-server readonly-community {{ vault_snmp_community_ro }} access any"
   become: true
+  changed_when: true
+ 
+#- name: "[Cumulus Linux] Configure SNMP user-name (NVUE)"
+#  ansible.builtin.command: "nv set system snmp-server username {{ vault_snmp_community_ro }}"
+#  become: true
+#  changed_when: true
 
-- name: "[Cumulus Linux] Restart snmpd"
-  ansible.builtin.systemd:
-    name: snmpd
-    state: restarted
-    enabled: true
+- name: "[Cumulus Linux] Configure SNMP trap destination (NVUE)"
+  ansible.builtin.command: "nv set system snmp-server trap-destination {{ vault_snmp_trap_host }} vrf mgmt community-password {{ vault_snmp_community_ro }}"
   become: true
+  changed_when: true
+
+#- name: "[Cumulus Linux] Apply NVUE configuration"
+#  ansible.builtin.command: "nv config apply -y"
+#  become: true
+#  changed_when: true
+
+- name: "[Cumulus Linux] Apply NVUE configuration"
+  ansible.builtin.command: nv config apply --assume-yes
+  changed_when: true
+  failed_when: false
+  register: nvue_apply_result
+
+- name: "[Cumulus Linux] Wait for switch to become reachable again"
+  ansible.builtin.wait_for_connection:
+    delay: 5
+    timeout: 60

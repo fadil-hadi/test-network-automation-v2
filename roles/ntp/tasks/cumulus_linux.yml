@@ -1,19 +1,29 @@
 ---
-- name: "[Cumulus Linux] Configure chrony NTP servers"
-  ansible.builtin.lineinfile:
-    path: /etc/chrony/chrony.conf
-    create: true
-    regexp: "^server {{ item }}"
-    line: "server {{ item }} iburst"
-    mode: "0644"
+- name: "[Cumulus Linux] Set NTP VRF (NVUE, 5.15+ syntax)"
+  ansible.builtin.command: "nv set system ntp vrf mgmt"
+  become: true
+  changed_when: true
+
+- name: "[Cumulus Linux] Add NTP servers (NVUE, 5.15+ syntax)"
   loop:
     - "{{ ntp_primary }}"
     - "{{ ntp_secondary }}"
+  ansible.builtin.command: "nv set system ntp server {{ item }}"
   become: true
+  changed_when: true
 
-- name: "[Cumulus Linux] Restart chrony"
-  ansible.builtin.systemd:
-    name: chrony
-    state: restarted
-    enabled: true
-  become: true
+#- name: "[Cumulus Linux] Apply NVUE configuration"
+#  ansible.builtin.command: "nv config apply -y"
+#  become: true
+#  changed_when: true
+
+- name: "[Cumulus Linux] Apply NVUE configuration"
+  ansible.builtin.command: nv config apply --assume-yes
+  changed_when: true
+  failed_when: false
+  register: nvue_apply_result
+
+- name: "[Cumulus Linux] Wait for switch to become reachable again"
+  ansible.builtin.wait_for_connection:
+    delay: 5
+    timeout: 60

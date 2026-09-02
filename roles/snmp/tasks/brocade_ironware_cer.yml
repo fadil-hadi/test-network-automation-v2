@@ -1,8 +1,8 @@
 ---
-- name: "[Brocade ICX] Configure SNMP"
+- name: "[Brocade CER/IronWare] Configure SNMP community and trap host (legacy-SSH workaround via expect)"
   ansible.builtin.expect:
     command: >-
-      ssh {{ icx_ssh_crypto_args }} {{ ansible_user }}@{{ ansible_host }}
+       ssh {{ legacy_ssh_crypto_args }} {{ ansible_user }}@{{ ansible_host }}
     responses:
       "[Pp]assword:\\s*$":
         - "{{ ansible_password }}"
@@ -10,11 +10,10 @@
         - "enable"
         - "configure terminal"
         - "snmp-server community {{ vault_snmp_community_ro }} ro"
-        - "snmp-server host {{ vault_snmp_trap_host }} {{ vault_snmp_community_ro }}"
+        - "snmp-server host {{ vault_snmp_trap_host }} version v2c {{ vault_snmp_community_ro }}"
         - "exit"
         - "exit"
         - "exit"
     timeout: 20
   changed_when: true
   delegate_to: localhost
-
