@@ -1,5 +1,6 @@
 ---
-- hosts: localhost
+- name: "Check — Verify ICX module availability"  
+  hosts: localhost
   gather_facts: false
   tasks:
     - name: Check if icx_config module is available
