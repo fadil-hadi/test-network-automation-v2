@@ -19,7 +19,14 @@ jobs:
       - name: Install Galaxy collections
         run: ansible-galaxy collection install -r requirements.yml
       - name: yamllint
-        run: yamllint -d "{extends: default, rules: {line-length: {max: 160}}}" .
+        run: |
+          cat > /tmp/yamllint-config.yml << 'YLEOF'
+          extends: default
+          rules:
+            line-length:
+              max: 160
+          YLEOF
+          yamllint -c /tmp/yamllint-config.yml .
       - name: ansible-lint
         run: ansible-lint playbooks/ roles/
       - name: Syntax check
