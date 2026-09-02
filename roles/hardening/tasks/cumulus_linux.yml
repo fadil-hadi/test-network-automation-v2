@@ -1,17 +1,10 @@
 ---
-- name: "[Cumulus Linux] Disable and mask telnet service"
-  ansible.builtin.systemd:
-    name: telnet.socket
-    enabled: false
-    state: stopped
-    masked: true
-  become: true
-  ignore_errors: true   # socket unit may not exist on all images
-
-- name: "[Cumulus Linux] Ensure plain HTTP mgmt is not exposed (NGINX/lighttpd example)"
-  ansible.builtin.systemd:
-    name: nginx
-    enabled: false
-    state: stopped
-  become: true
-  ignore_errors: true
+# Cumulus Linux (NVUE, 5.15+) does not expose a telnet server or a plain-HTTP
+# management interface at all — confirmed via `nv set system --help`, no
+# telnet-server or http-server subsystem exists. Nothing to disable here.
+- name: "[Cumulus Linux] Confirm no telnet/plain-HTTP service exists to disable"
+  ansible.builtin.debug:
+    msg: >-
+      No telnet-server or http-server subsystem found under NVUE on this
+      platform/version — nothing to disable. If a future Cumulus release
+      reintroduces one, add an `nv set system <x> state disabled` task here.

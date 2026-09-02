@@ -5,4 +5,5 @@
 # Usage: ansible-playbook playbooks/dry_run.yml --syntax-check
 # Or in Semaphore: create a separate job template for this
 # ============================================================
-- import_playbook: site.yml
+- name: "Dry Run — Syntax check via site.yml (no changes applied)"
+  import_playbook: site.yml

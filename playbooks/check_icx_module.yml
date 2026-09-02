@@ -1,0 +1,14 @@
+---
+- name: "Check — Verify ICX module availability"
+  hosts: localhost
+  gather_facts: false
+  tasks:
+    - name: Check if icx_config module is available
+      ansible.builtin.command: ansible-doc community.network.icx_config
+      register: icx_doc_check
+      changed_when: false
+      failed_when: false
+
+    - name: Show result
+      ansible.builtin.debug:
+        msg: "{{ icx_doc_check.stdout_lines if icx_doc_check.rc == 0 else 'NOT FOUND: ' + icx_doc_check.stderr }}"

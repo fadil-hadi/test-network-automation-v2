@@ -1,0 +1,25 @@
+---
+- name: "[Brocade CER/IronWare] Disable Telnet server (legacy-SSH workaround via expect)"
+  ansible.builtin.expect:
+    command: >-
+      ssh {{ legacy_ssh_crypto_args }} {{ ansible_user }}@{{ ansible_host }}
+    responses:
+      "[Pp]assword:\\s*$":
+        - "{{ ansible_password }}"
+      "[>#]\\s*$":
+        - "enable"
+        - "configure terminal"
+        - "no telnet server"
+        - "exit"
+        - "exit"
+        - "exit"
+    timeout: 20
+  changed_when: true
+  delegate_to: localhost
+
+- name: "[Brocade CER/IronWare] Confirm no plain-HTTP/web management exists"
+  ansible.builtin.debug:
+    msg: >-
+      No 'web'/'http' management subsystem found on this platform
+      (confirmed via CLI: both 'web' and 'http' return Unrecognized
+      command). Nothing further to disable here.

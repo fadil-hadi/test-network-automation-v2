@@ -1,0 +1,22 @@
+---
+# Pushes the Git-tracked router_lab.db to the Oxidized host and
+# triggers a reload. Run this manually in Semaphore after merging
+# any change to oxidized/router_lab.db.
+- name: "Sync router.db to Oxidized host"
+  hosts: oxidized_host
+  gather_facts: false
+  tasks:
+    - name: "Copy router_lab.db to Oxidized config directory"
+      ansible.builtin.copy:
+        src: "{{ playbook_dir }}/../oxidized/router_lab.db"
+        dest: /home/oxidized/.config/oxidized/router.db
+        owner: oxidized
+        group: oxidized
+        mode: "0600"
+      become: true
+
+    - name: "Restart Oxidized service via systemctl"
+      ansible.builtin.systemd:
+        name: oxidized
+        state: restarted
+      become: true

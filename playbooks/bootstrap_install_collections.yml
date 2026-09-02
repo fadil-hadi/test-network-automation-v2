@@ -1,0 +1,8 @@
+---
+- name: "Bootstrap — Install required Ansible collections"
+  hosts: localhost
+  gather_facts: false
+  tasks:
+    - name: Install required Ansible collections
+      ansible.builtin.command: ansible-galaxy collection install -r requirements.yml
+      changed_when: true

@@ -1,8 +1,8 @@
 ---
-- name: "[Brocade ICX] Configure NTP servers"
+- name: "[Brocade CER/IronWare] Configure NTP servers (legacy-SSH workaround via expect)"
   ansible.builtin.expect:
     command: >-
-      ssh {{ icx_ssh_crypto_args }} {{ ansible_user }}@{{ ansible_host }}
+      ssh {{ legacy_ssh_crypto_args }} {{ ansible_user }}@{{ ansible_host }}
     responses:
       "[Pp]assword:\\s*$":
         - "{{ ansible_password }}"
@@ -13,7 +13,6 @@
         - "server {{ ntp_primary }}"
         - "server {{ ntp_secondary }}"
         - "exit"
-        - "clock timezone gmt+07"
         - "exit"
         - "exit"
         - "exit"

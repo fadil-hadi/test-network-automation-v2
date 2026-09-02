@@ -1,15 +1,10 @@
 ---
-- name: "[Cumulus Linux] Point rsyslog at the central syslog server"
-  ansible.builtin.lineinfile:
-    path: /etc/rsyslog.d/60-fif-remote.conf
-    create: true
-    line: "*.* @{{ syslog_server }}:{{ syslog_port }}"
-    mode: "0644"
+- name: "[Cumulus Linux] Add syslog server (NVUE)"
+  ansible.builtin.command: "nv set system syslog server {{ syslog_server }}"
   become: true
-  notify: restart rsyslog cumulus
+  changed_when: true
 
-- name: "[Cumulus Linux] Restart rsyslog now (immediate, no handler wait in lab runs)"
-  ansible.builtin.systemd:
-    name: rsyslog
-    state: restarted
+- name: "[Cumulus Linux] Apply NVUE configuration"
+  ansible.builtin.command: "nv config apply -y"
   become: true
+  changed_when: true
