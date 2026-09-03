@@ -6,3 +6,6 @@ Cumulus-Windriver:10.201.9.10:cumulus:distribute
 
 # CER
 CER:10.201.9.12:ironware:core
+
+#ICX
+ICX:10.201.9.13:ironware:access
