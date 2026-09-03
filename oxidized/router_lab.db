@@ -8,4 +8,4 @@ Cumulus-Windriver:10.201.9.10:cumulus:distribute
 CER:10.201.9.12:ironware:core
 
 #ICX
-ICX:10.201.9.13:ironware:access
+ICX:10.201.9.13:ironware:access:+diffie-hellman-group1-sha1
