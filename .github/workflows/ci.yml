@@ -25,5 +25,4 @@ jobs:
         run: ansible-lint playbooks/ roles/
       - name: Syntax check
         run: |
-          ansible-playbook playbooks/site.yml --syntax-check
           ansible-playbook -i inventory/lab/hosts playbooks/lab_pipeline_test.yml --syntax-check

@@ -1,6 +1,0 @@
----
-- name: "[Cumulus Linux] Add trunked VLANs to interface via NCLU"
-  community.network.nclu:
-    commands:
-      - "add interface {{ interface_name }} bridge vids {{ trunk_vlan_list }}"
-    commit: true
