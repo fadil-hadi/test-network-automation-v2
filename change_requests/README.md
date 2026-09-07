@@ -7,7 +7,7 @@ contains the change.
 
 ## Naming convention
 CR-XXX-short-description.yml
-Example: CR-042-add-vlan100-finance-ho-access.yml
+Example: CR-042-change-ip-syslog.yml
 
 ## Status values
 - pending   : CR created, not yet applied
