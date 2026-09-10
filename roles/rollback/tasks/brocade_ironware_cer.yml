@@ -111,6 +111,7 @@
         - "no server {{ ntp_primary }}"
         - "no server {{ ntp_secondary }}"
         - "exit"
+        - "no clock timezone gmt gmt+07"
         - "exit"
         - "exit"
         - "exit"

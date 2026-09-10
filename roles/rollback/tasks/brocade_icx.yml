@@ -125,7 +125,7 @@
         - "no server {{ ntp_primary }}"
         - "no server {{ ntp_secondary }}"
         - "exit"
-        - "no clock timezone"
+        - "no clock timezone gmt gmt+07"
         - "write memory"
         - "exit"
         - "exit"
