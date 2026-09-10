@@ -16,8 +16,7 @@ test-network-automation/
 ├── roles/                   # One role per config concern, e.g. roles/snmp/
 │   └── <role>/tasks/
 ├── playbooks/
-│   ├── lab_pipeline_test.yml # Runs the SAME roles against the lab inventory
-│   └── changes/               # Day-2 change playbooks (VLAN, routing, interfaces)
+│   └── lab_pipeline_test.yml # Runs the SAME roles against the lab inventory
 ├── change_requests/          # CR audit trail — see change_requests/README.md
 ├── oxidized/
 │   ├── router.db             # Production device list
