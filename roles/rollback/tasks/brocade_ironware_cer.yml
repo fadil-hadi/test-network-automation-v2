@@ -11,7 +11,7 @@
 - name: "[Rollback][Brocade CER] Undo hardening — re-enable Telnet only"
   ansible.builtin.expect:
     command: >-
-      ssh {{ icx_ssh_crypto_args }} {{ ansible_user }}@{{ ansible_host }}
+      ssh {{ legacy_ssh_crypto_args }} {{ ansible_user }}@{{ ansible_host }}
     responses:
       "[Pp]assword:\\s*$":
         - "{{ ansible_password }}"
@@ -33,7 +33,7 @@
 #- name: "[Rollback][Brocade CER] Undo access — remove RSA client key"
 #  ansible.builtin.expect:
 #    command: >-
-#      ssh {{ icx_ssh_crypto_args }} {{ ansible_user }}@{{ ansible_host }}
+#      ssh {{ legacy_ssh_crypto_args }} {{ ansible_user }}@{{ ansible_host }}
 #    responses:
 #      "[Pp]assword:\\s*$":
 #        - "{{ ansible_password }}"
@@ -49,6 +49,24 @@
 # Forward: logging host / logging facility / 3x exit (same as ICX)
 # Rollback: no logging host / no logging facility
 - name: "[Rollback][Brocade CER] Undo syslog — remove loghost and facility"
+  ansible.builtin.expect:
+    command: >-
+      ssh {{ legacy_ssh_crypto_args }} {{ ansible_user }}@{{ ansible_host }}
+    responses:
+      "[Pp]assword:\\s*$":
+        - "{{ ansible_password }}"
+      "[>#]\\s*$":
+        - "enable"
+        - "configure terminal"
+        - "no logging host {{ syslog_server }}"
+        - "no logging facility {{ syslog_facility }}"
+        - "exit"
+        - "exit"
+        - "exit"
+        - "exit"
+    timeout: 20
+  changed_when: true
+  delegate_to: localhost
 
 # ── Rollback SNMP ─────────────────────────────────────────────
 # Forward: snmp-server host <ip> version v2c <community> (CER)
@@ -57,7 +75,7 @@
 - name: "[Rollback][Brocade CER] Undo SNMP — remove trap host (version v2c) and community"
   ansible.builtin.expect:
     command: >-
-      ssh {{ icx_ssh_crypto_args }} {{ ansible_user }}@{{ ansible_host }}
+      ssh {{ legacy_ssh_crypto_args }} {{ ansible_user }}@{{ ansible_host }}
     responses:
       "[Pp]assword:\\s*$":
         - "{{ ansible_password }}"
@@ -82,7 +100,7 @@
 - name: "[Rollback][Brocade CER] Undo NTP — restore defaults (no timezone to undo on CER)"
   ansible.builtin.expect:
     command: >-
-      ssh {{ icx_ssh_crypto_args }} {{ ansible_user }}@{{ ansible_host }}
+      ssh {{ legacy_ssh_crypto_args }} {{ ansible_user }}@{{ ansible_host }}
     responses:
       "[Pp]assword:\\s*$":
         - "{{ ansible_password }}"
