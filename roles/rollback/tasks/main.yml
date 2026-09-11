@@ -1,0 +1,14 @@
+---
+- name: "[rollback] Fail fast if device_series is missing/unsupported"
+  ansible.builtin.assert:
+    that:
+      - device_series is defined
+      - device_series in ['huawei_vrp_s', 'huawei_vrp_s_v600', 'huawei_vrp_ce',
+                          'aruba_aoscx', 'cumulus_linux', 'brocade_icx',
+                          'brocade_ironware_cer']
+    fail_msg: >-
+      device_series '{{ device_series | default("UNDEFINED") }}' is not set or
+      not supported on host {{ inventory_hostname }}.
+
+- name: "[rollback] Include platform-specific rollback tasks for {{ device_series }}"
+  ansible.builtin.include_tasks: "{{ device_series }}.yml"

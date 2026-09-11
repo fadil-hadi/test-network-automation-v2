@@ -1,0 +1,135 @@
+---
+# ── Rollback credentials ──────────────────────────────────────
+# Forward: username <user> password + privilege 0 / 3x exit
+# Rollback: no username privilege only — account NOT removed
+#- name: "[Rollback][Brocade ICX] Undo credentials — reset privilege"
+#  ansible.builtin.expect:
+#    command: >-
+#      ssh {{ icx_ssh_crypto_args }} {{ ansible_user }}@{{ ansible_host }}
+#    responses:
+#      "[Pp]assword:\\s*$":
+#        - "{{ ansible_password }}"
+#      "[>#]\\s*$":
+#        - "enable"
+#        - "configure terminal"
+#        - "no username {{ ansible_user }} privilege"
+#        - "exit"
+#        - "exit"
+#        - "exit"
+#    timeout: 20
+#  changed_when: true
+#  delegate_to: localhost
+
+# ── Rollback hardening ────────────────────────────────────────
+# Forward: no telnet server / no web-management http / 3x exit
+# Rollback: telnet server / web-management http
+- name: "[Rollback][Brocade ICX] Undo hardening — re-enable Telnet and HTTP"
+  ansible.builtin.expect:
+    command: >-
+      ssh {{ icx_ssh_crypto_args }} {{ ansible_user }}@{{ ansible_host }}
+    responses:
+      "[Pp]assword:\\s*$":
+        - "{{ ansible_password }}"
+      "[>#]\\s*$":
+        - "enable"
+        - "configure terminal"
+        - "telnet server"
+        - "web-management http"
+        - "exit"
+        - "exit"
+        - "exit"
+    timeout: 20
+  changed_when: true
+  delegate_to: localhost
+
+# ── Rollback access ───────────────────────────────────────────
+# Forward: crypto key generate rsa / ip ssh server enable / web-management https / 3x exit
+# Rollback: no web-management https ONLY — SSH NOT disabled (cuts connection)
+- name: "[Rollback][Brocade ICX] Undo access — disable HTTPS (SSH kept active)"
+  ansible.builtin.expect:
+    command: >-
+      ssh {{ icx_ssh_crypto_args }} {{ ansible_user }}@{{ ansible_host }}
+    responses:
+      "[Pp]assword:\\s*$":
+        - "{{ ansible_password }}"
+      "[>#]\\s*$":
+        - "enable"
+        - "configure terminal"
+        - "no web-management https"
+        - "exit"
+        - "exit"
+        - "exit"
+    timeout: 20
+  changed_when: true
+  delegate_to: localhost
+
+# ── Rollback syslog ───────────────────────────────────────────
+# Forward: logging host / logging facility / 3x exit
+# Rollback: no logging host / no logging facility
+- name: "[Rollback][Brocade ICX] Undo syslog — remove loghost and facility"
+  ansible.builtin.expect:
+    command: >-
+      ssh {{ icx_ssh_crypto_args }} {{ ansible_user }}@{{ ansible_host }}
+    responses:
+      "[Pp]assword:\\s*$":
+        - "{{ ansible_password }}"
+      "[>#]\\s*$":
+        - "enable"
+        - "configure terminal"
+        - "no logging host {{ syslog_server }}"
+        - "no logging facility {{ syslog_facility }}"
+        - "exit"
+        - "exit"
+        - "exit"
+    timeout: 20
+  changed_when: true
+  delegate_to: localhost
+
+# ── Rollback SNMP ─────────────────────────────────────────────
+# Forward: snmp-server community ro / snmp-server host (no version keyword) / 3x exit
+# Rollback: no snmp-server host first, then no community
+- name: "[Rollback][Brocade ICX] Undo SNMP — remove trap host and community"
+  ansible.builtin.expect:
+    command: >-
+      ssh {{ icx_ssh_crypto_args }} {{ ansible_user }}@{{ ansible_host }}
+    responses:
+      "[Pp]assword:\\s*$":
+        - "{{ ansible_password }}"
+      "[>#]\\s*$":
+        - "enable"
+        - "configure terminal"
+        - "no snmp-server host {{ vault_snmp_trap_host }} {{ vault_snmp_community_ro }}"
+        - "no snmp-server community {{ vault_snmp_community_ro }} ro"
+        - "exit"
+        - "exit"
+        - "exit"
+    timeout: 20
+  changed_when: true
+  delegate_to: localhost
+
+# ── Rollback NTP ──────────────────────────────────────────────
+# Forward: ntp → server primary/secondary → exit → clock timezone gmt+07 → 3x exit
+# Rollback: ntp → no server pushed → restore defaults → exit
+#           no clock timezone → write memory → 3x exit
+- name: "[Rollback][Brocade ICX] Undo NTP — restore defaults and remove timezone"
+  ansible.builtin.expect:
+    command: >-
+      ssh {{ icx_ssh_crypto_args }} {{ ansible_user }}@{{ ansible_host }}
+    responses:
+      "[Pp]assword:\\s*$":
+        - "{{ ansible_password }}"
+      "[>#]\\s*$":
+        - "enable"
+        - "configure terminal"
+        - "ntp"
+        - "no server {{ ntp_primary }}"
+        - "no server {{ ntp_secondary }}"
+        - "exit"
+        - "no clock timezone gmt gmt+07"
+        - "write memory"
+        - "exit"
+        - "exit"
+        - "exit"
+    timeout: 20
+  changed_when: true
+  delegate_to: localhost

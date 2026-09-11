@@ -13,6 +13,7 @@
         - "server {{ ntp_primary }}"
         - "server {{ ntp_secondary }}"
         - "exit"
+        - "clock timezone gmt gmt+07"
         - "exit"
         - "exit"
         - "exit"
