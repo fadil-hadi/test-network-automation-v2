@@ -1,0 +1,11 @@
+---
+ansible_user: "{{ vault_aruba_username }}"
+ansible_password: "{{ vault_aruba_password }}"
+ansible_network_os: arubanetworks.aoscx.aoscx
+ansible_connection: arubanetworks.aoscx.aoscx
+ansible_aoscx_validate_certs: false
+ansible_aoscx_use_proxy: false
+
+device_series: "aruba_aoscx"
+device_location: "LAB"
+device_role: "lab-ho-core-standin"

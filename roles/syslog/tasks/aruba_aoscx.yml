@@ -1,0 +1,10 @@
+---
+- name: "[Aruba AOS-CX] Configure remote syslog server"
+  arubanetworks.aoscx.aoscx_syslog:
+    remote_syslog_server:
+      "{{ syslog_server }}":
+        transport: "udp"
+        port: "{{ syslog_port }}"
+        severity: "{{ syslog_severity }}"
+    state: create
+

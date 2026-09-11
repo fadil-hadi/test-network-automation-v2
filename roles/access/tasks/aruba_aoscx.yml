@@ -1,0 +1,11 @@
+---
+- name: "[Aruba AOS-CX] Enable SSH server and HTTPS management on mgmt VRF"
+  arubanetworks.aoscx.aoscx_command:
+    commands:
+      - "configure terminal"
+      - "ssh server vrf mgmt"
+      - "https-server vrf mgmt"
+      - "https-server rest access-mode read-write"
+      - "exit"
+  vars:
+    ansible_connection: network_cli

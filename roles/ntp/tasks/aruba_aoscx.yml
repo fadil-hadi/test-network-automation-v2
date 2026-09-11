@@ -1,0 +1,27 @@
+---
+- name: "[Aruba AOS-CX] Configure primary NTP server"
+  arubanetworks.aoscx.aoscx_ntp_associations:
+    ntp_host: "{{ ntp_primary }}"
+    burst: false
+    iburst: true
+    prefer: true
+    key_id: null
+    state: create
+
+- name: "[Aruba AOS-CX] Configure secondary NTP server"
+  arubanetworks.aoscx.aoscx_ntp_associations:
+    ntp_host: "{{ ntp_secondary }}"
+    burst: false
+    iburst: true
+    prefer: false
+    key_id: null
+    state: create
+
+- name: "[Aruba AOS-CX] Set NTP timezone"
+  arubanetworks.aoscx.aoscx_command:
+    commands:
+      - "configure terminal"
+      - "clock timezone {{ ntp_timezone }}"
+      - "exit"
+  vars:
+    ansible_connection: network_cli

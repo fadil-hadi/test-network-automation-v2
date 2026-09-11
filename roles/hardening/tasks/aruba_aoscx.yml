@@ -1,0 +1,11 @@
+---
+- name: "[Aruba AOS-CX] Disable Telnet server and plain-HTTP web management"
+  arubanetworks.aoscx.aoscx_command:
+    commands:
+      - "configure terminal"
+      - "no telnet-server"
+      - "no web-management plaintext"
+      - "exit"
+  vars:
+    ansible_connection: network_cli
+

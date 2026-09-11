@@ -1,0 +1,15 @@
+---
+- name: "[Aruba AOS-CX] Configure SNMP read-only community"
+  arubanetworks.aoscx.aoscx_snmp_community:
+    name: "{{ vault_snmp_community_ro }}"
+    type: "ro"
+    state: create
+
+- name: "[Aruba AOS-CX] Configure SNMP trap destination"
+  arubanetworks.aoscx.aoscx_snmp_trap_receiver:
+    name: "{{ vault_snmp_trap_host }}"
+    community: "{{ vault_snmp_community_ro }}"
+    version: "v2c"
+    port: 162
+    state: create
+
