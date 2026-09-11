@@ -1,0 +1,121 @@
+---
+# ── Rollback credentials ──────────────────────────────────────
+# Forward: username password only (NO privilege line on CER)
+# Rollback: nothing to undo — session used for reachability check only
+#- name: "[Rollback][Brocade CER] Undo credentials — verify reachability"
+# changed_when: false   ← show version only, no config change
+
+# ── Rollback hardening ────────────────────────────────────────
+# Forward: no telnet server ONLY (no web/http — CER has no web subsystem)
+# Rollback: telnet server only — no HTTP to re-enable
+- name: "[Rollback][Brocade CER] Undo hardening — re-enable Telnet only"
+  ansible.builtin.expect:
+    command: >-
+      ssh {{ legacy_ssh_crypto_args }} {{ ansible_user }}@{{ ansible_host }}
+    responses:
+      "[Pp]assword:\\s*$":
+        - "{{ ansible_password }}"
+      "[>#]\\s*$":
+        - "enable"
+        - "configure terminal"
+        - "telnet server"
+        - "exit"
+        - "exit"
+        - "exit"
+        - "exit"
+    timeout: 20
+  changed_when: true
+  delegate_to: localhost
+
+# ── Rollback access ───────────────────────────────────────────
+# Forward: crypto key CLIENT generate rsa (CER) vs crypto key generate rsa (ICX)
+# Rollback: no crypto key client rsa — SSH NOT disabled
+#- name: "[Rollback][Brocade CER] Undo access — remove RSA client key"
+#  ansible.builtin.expect:
+#    command: >-
+#      ssh {{ legacy_ssh_crypto_args }} {{ ansible_user }}@{{ ansible_host }}
+#    responses:
+#      "[Pp]assword:\\s*$":
+#        - "{{ ansible_password }}"
+#      "[>#]\\s*$":
+#        - "enable"
+#        - "configure terminal"
+#        - "no crypto key client rsa"
+#        - "exit"
+#        - "exit"
+#        - "exit"
+#        - "exit"
+# ── Rollback syslog ───────────────────────────────────────────
+# Forward: logging host / logging facility / 3x exit (same as ICX)
+# Rollback: no logging host / no logging facility
+- name: "[Rollback][Brocade CER] Undo syslog — remove loghost and facility"
+  ansible.builtin.expect:
+    command: >-
+      ssh {{ legacy_ssh_crypto_args }} {{ ansible_user }}@{{ ansible_host }}
+    responses:
+      "[Pp]assword:\\s*$":
+        - "{{ ansible_password }}"
+      "[>#]\\s*$":
+        - "enable"
+        - "configure terminal"
+        - "no logging host {{ syslog_server }}"
+        - "no logging facility {{ syslog_facility }}"
+        - "exit"
+        - "exit"
+        - "exit"
+        - "exit"
+    timeout: 20
+  changed_when: true
+  delegate_to: localhost
+
+# ── Rollback SNMP ─────────────────────────────────────────────
+# Forward: snmp-server host <ip> version v2c <community> (CER)
+#          vs snmp-server host <ip> <community> (ICX — no version keyword)
+# Rollback: no snmp-server host version v2c — must include "version v2c"
+- name: "[Rollback][Brocade CER] Undo SNMP — remove trap host (version v2c) and community"
+  ansible.builtin.expect:
+    command: >-
+      ssh {{ legacy_ssh_crypto_args }} {{ ansible_user }}@{{ ansible_host }}
+    responses:
+      "[Pp]assword:\\s*$":
+        - "{{ ansible_password }}"
+      "[>#]\\s*$":
+        - "enable"
+        - "configure terminal"
+        - "no snmp-server host {{ vault_snmp_trap_host }} version v2c {{ vault_snmp_community_ro }}"
+        - "no snmp-server community {{ vault_snmp_community_ro }} ro"
+        - "exit"
+        - "exit"
+        - "exit"
+        - "exit"
+    timeout: 20
+  changed_when: true
+  delegate_to: localhost
+
+# ── Rollback NTP ──────────────────────────────────────────────
+# Forward: ntp → server primary/secondary → 4x exit (CER)
+#          vs 3x exit + clock timezone (ICX)
+# Rollback: ntp → no server pushed → restore defaults → exit
+#           write memory → 4x exit (NO no clock timezone — CER never pushed it)
+- name: "[Rollback][Brocade CER] Undo NTP — restore defaults (no timezone to undo on CER)"
+  ansible.builtin.expect:
+    command: >-
+      ssh {{ legacy_ssh_crypto_args }} {{ ansible_user }}@{{ ansible_host }}
+    responses:
+      "[Pp]assword:\\s*$":
+        - "{{ ansible_password }}"
+      "[>#]\\s*$":
+        - "enable"
+        - "configure terminal"
+        - "ntp"
+        - "no server {{ ntp_primary }}"
+        - "no server {{ ntp_secondary }}"
+        - "exit"
+        - "no clock timezone gmt gmt+07"
+        - "exit"
+        - "exit"
+        - "exit"
+    timeout: 20
+  changed_when: true
+  delegate_to: localhost
+
