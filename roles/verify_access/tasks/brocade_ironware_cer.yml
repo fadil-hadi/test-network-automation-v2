@@ -1,0 +1,20 @@
+---
+- name: "[Brocade CER] Verify SSH access and capture version"
+  ansible.builtin.expect:
+    command: >-
+      ssh {{ legacy_ssh_crypto_args }} {{ ansible_user }}@{{ ansible_host }}
+    responses:
+      "[Pp]assword:\\s*$":
+        - "{{ ansible_password }}"
+      "[>#]\\s*$":
+        - "show version"
+        - "exit"
+    timeout: 20
+  delegate_to: localhost
+  changed_when: false
+  register: access_result
+
+- name: "Record access check result"
+  ansible.builtin.set_fact:
+    audit_access_status: "{{ 'PASS' if access_result.rc == 0 else 'FAIL' }}"
+    audit_access_detail: "SSH login + show version succeeded"

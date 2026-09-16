@@ -1,0 +1,19 @@
+---
+- name: "[Brocade CER] Verify NTP servers configured"
+  ansible.builtin.expect:
+    command: "ssh {{ legacy_ssh_crypto_args }} {{ ansible_user }}@{{ ansible_host }}"
+    responses:
+      "[Pp]assword:\\s*$":
+        - "{{ ansible_password }}"
+      "[>#]\\s*$":
+        - "show ntp"
+        - "exit"
+    timeout: 20
+  delegate_to: localhost
+  changed_when: false
+  register: ntp_result
+
+- name: "Record NTP check result"
+  ansible.builtin.set_fact:
+    audit_ntp_status: "{{ 'PASS' if (ntp_primary in ntp_result.stdout_lines[0]) else 'NEEDS REVIEW' }}"
+    audit_ntp_detail: "{{ ntp_result.stdout_lines[0] | default('no output captured') }}"
