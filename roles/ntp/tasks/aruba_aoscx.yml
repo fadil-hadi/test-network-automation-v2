@@ -1,0 +1,22 @@
+---
+# ============================================================
+# Role: ntp — Aruba AOS-CX
+# Connection: network_cli (SSH) via aoscx_config
+#
+# aoscx_ntp_associations does NOT exist in arubanetworks.aoscx
+# collection. Correct approach is aoscx_config with CLI NTP
+# commands.
+# Vars sourced from group_vars/all/vars.yml:
+#   ntp_primary   : primary NTP server IP
+#   ntp_secondary : secondary NTP server IP
+#   ntp_timezone  : Asia/Jakarta
+# ============================================================
+
+- name: "[Aruba AOS-CX] Configure NTP servers and timezone"
+  arubanetworks.aoscx.aoscx_config:
+    lines:
+      - "ntp server {{ ntp_primary }} prefer"
+      - "ntp server {{ ntp_secondary }}"
+      - "clock timezone {{ ntp_timezone }}"
+  vars:
+    ansible_connection: network_cli
