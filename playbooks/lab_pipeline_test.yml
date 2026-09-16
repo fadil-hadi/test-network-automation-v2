@@ -58,3 +58,15 @@
     - syslog
     - snmp
     - ntp
+
+- name: "Lab — Aruba AOS-CX (HO core stand-in)"
+  hosts: aruba_lab
+  gather_facts: false
+  serial: 1
+  roles:
+    - credentials
+    - hardening
+    - access
+    - syslog
+    - snmp
+    - ntp

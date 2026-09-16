@@ -1,0 +1,20 @@
+---
+# ============================================================
+# Role: snmp — Aruba AOS-CX
+# Connection: network_cli (SSH) via aoscx_config
+#
+# aoscx_snmp_community and aoscx_snmp_trap_receiver do NOT
+# exist in arubanetworks.aoscx collection.
+# Correct approach is aoscx_config with CLI SNMP commands.
+# Vars sourced from group_vars/all/vars.yml and all/vault.yml:
+#   vault_snmp_community_ro : read-only community string
+#   vault_snmp_trap_host    : trap destination IP
+# ============================================================
+
+- name: "[Aruba AOS-CX] Configure SNMP read-only community and trap destination"
+  arubanetworks.aoscx.aoscx_config:
+    lines:
+      - "snmp-server community {{ vault_snmp_community_ro }}"
+      - "snmp-server host {{ vault_snmp_trap_host }} version v2c {{ vault_snmp_community_ro }} trap"
+  vars:
+    ansible_connection: network_cli

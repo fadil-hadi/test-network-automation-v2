@@ -1,0 +1,17 @@
+---
+# ============================================================
+# Role: hardening — Aruba AOS-CX
+# Connection: network_cli (SSH) via aoscx_config
+#
+# Disables Telnet and plain-HTTP web management.
+# REST API and SSH remain active for Ansible and operator access.
+# ============================================================
+
+- name: "[Aruba AOS-CX] Disable Telnet server and plain-HTTP web management"
+  arubanetworks.aoscx.aoscx_config:
+    lines:
+      - "no telnet-server"
+      - "no web-management plaintext"
+  vars:
+    ansible_connection: network_cli
+

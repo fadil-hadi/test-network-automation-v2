@@ -1,0 +1,20 @@
+---
+# ============================================================
+# Role: syslog — Aruba AOS-CX
+# Connection: network_cli (SSH) via aoscx_config
+#
+# aoscx_syslog does NOT exist in arubanetworks.aoscx collection.
+# Correct approach is aoscx_config with CLI syslog commands.
+# Vars sourced from group_vars/all/vars.yml:
+#   syslog_server   : destination IP
+#   syslog_port     : UDP port (lab uses 50000)
+#   syslog_severity : informational
+# ============================================================
+
+- name: "[Aruba AOS-CX] Configure remote syslog server"
+  arubanetworks.aoscx.aoscx_config:
+    lines:
+      - "logging {{ syslog_server }} transport udp port {{ syslog_port }}"
+      - "logging severity {{ syslog_severity }}"
+  vars:
+    ansible_connection: network_cli
