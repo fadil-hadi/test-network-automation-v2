@@ -28,16 +28,17 @@
         mode: '0644'
       loop:
         - check: "SSH Access"
-          status: "{{ audit_access_status }}"
-          detail: "{{ audit_access_detail }}"
+          status: "{{ verify_access_status }}"
+          detail: "{{ verify_access_detail }}"
         - check: "SNMP Functional"
-          status: "{{ audit_snmp_status }}"
-          detail: "{{ audit_snmp_detail }}"
+          status: "{{ verify_snmp_status }}"
+          detail: "{{ verify_snmp_detail }}"
         - check: "NTP Configured"
-          status: "{{ audit_ntp_status }}"
-          detail: "{{ audit_ntp_detail }}"
+          status: "{{ verify_ntp_status }}"
+          detail: "{{ verify_ntp_detail }}"
       delegate_to: localhost
 
     - name: "Show this device's results"
       ansible.builtin.debug:
-        msg: "{{ inventory_hostname }}: SSH={{ audit_access_status }} | SNMP={{ audit_snmp_status }} | NTP={{ audit_ntp_status }}"
+        msg: "{{ inventory_hostname }}: SSH={{ verify_access_status }} | SNMP={{ verify_snmp_status }} | NTP={{ verify_ntp_status }}"
+

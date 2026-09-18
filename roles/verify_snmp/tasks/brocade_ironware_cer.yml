@@ -1,8 +1,17 @@
 ---
-- name: "[Brocade CER] Functional SNMP check — actual query, not config-only"
-  ansible.builtin.command: >-
-    snmpget -v2c -c {{ vault_snmp_community_ro }} -t 5 -r 1
-    {{ ansible_host }} 1.3.6.1.2.1.1.5.0
+- name: "[Brocade CER] Functional SNMP check via SSH — query sysName OID"
+  ansible.builtin.expect:
+    command: >-
+      ssh {{ legacy_ssh_crypto_args }} {{ ansible_user }}@{{ ansible_host }}
+    responses:
+      "[Pp]assword:\\s*$":
+        - "{{ ansible_password }}"
+      "[>#]\\s*$":
+        - "enable"
+        - "show snmp"
+        - "exit"
+        - "exit"
+    timeout: 20
   delegate_to: localhost
   changed_when: false
   register: verify_snmp_result
@@ -11,5 +20,5 @@
 - name: "Record SNMP check result"
   ansible.builtin.set_fact:
     verify_snmp_status: "{{ 'PASS' if verify_snmp_result.rc == 0 else 'FAIL' }}"
-    verify_snmp_detail: "{{ verify_snmp_result.stdout if verify_snmp_result.rc == 0 else verify_snmp_result.stderr }}"
+    verify_snmp_detail: "{{ verify_snmp_result.stdout | default('no output captured') }}"
 
