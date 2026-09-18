@@ -16,5 +16,6 @@
 
 - name: "Record access check result"
   ansible.builtin.set_fact:
-    verify_access_status: "{{ 'PASS' if access_result.rc == 0 else 'FAIL' }}"
+    verify_access_status: "{{ 'PASS' if verify_access_result.rc == 0 else 'FAIL' }}"
     verify_access_detail: "SSH login + show version succeeded"
+

@@ -15,5 +15,6 @@
 
 - name: "Record NTP check result"
   ansible.builtin.set_fact:
-    verify_ntp_status: "{{ 'PASS' if (ntp_primary in ntp_result.stdout_lines[0]) else 'NEEDS REVIEW' }}"
-    verify_ntp_detail: "{{ ntp_result.stdout_lines[0] | default('no output captured') }}"
+    verify_ntp_status: "{{ 'PASS' if (ntp_primary in verify_ntp_result.stdout_lines[0]) else 'NEEDS REVIEW' }}"
+    verify_ntp_detail: "{{ verify_ntp_result.stdout_lines[0] | default('no output captured') }}"
+

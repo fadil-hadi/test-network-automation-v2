@@ -10,5 +10,6 @@
 
 - name: "Record SNMP check result"
   ansible.builtin.set_fact:
-    verify_snmp_status: "{{ 'PASS' if snmp_result.rc == 0 else 'FAIL' }}"
-    verify_snmp_detail: "{{ snmp_result.stdout if snmp_result.rc == 0 else snmp_result.stderr }}"
+    verify_snmp_status: "{{ 'PASS' if verify_snmp_result.rc == 0 else 'FAIL' }}"
+    verify_snmp_detail: "{{ verify_snmp_result.stdout if verify_snmp_result.rc == 0 else verify_snmp_result.stderr }}"
+
