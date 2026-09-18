@@ -11,9 +11,9 @@
     timeout: 20
   delegate_to: localhost
   changed_when: false
-  register: ntp_result
+  register: verify_ntp_result
 
 - name: "Record NTP check result"
   ansible.builtin.set_fact:
-    audit_ntp_status: "{{ 'PASS' if (ntp_primary in ntp_result.stdout_lines[0]) else 'NEEDS REVIEW' }}"
-    audit_ntp_detail: "{{ ntp_result.stdout_lines[0] | default('no output captured') }}"
+    verify_ntp_status: "{{ 'PASS' if (ntp_primary in ntp_result.stdout_lines[0]) else 'NEEDS REVIEW' }}"
+    verify_ntp_detail: "{{ ntp_result.stdout_lines[0] | default('no output captured') }}"

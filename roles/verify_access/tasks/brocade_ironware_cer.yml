@@ -12,9 +12,9 @@
     timeout: 20
   delegate_to: localhost
   changed_when: false
-  register: access_result
+  register: verify_access_result
 
 - name: "Record access check result"
   ansible.builtin.set_fact:
-    audit_access_status: "{{ 'PASS' if access_result.rc == 0 else 'FAIL' }}"
-    audit_access_detail: "SSH login + show version succeeded"
+    verify_access_status: "{{ 'PASS' if access_result.rc == 0 else 'FAIL' }}"
+    verify_access_detail: "SSH login + show version succeeded"

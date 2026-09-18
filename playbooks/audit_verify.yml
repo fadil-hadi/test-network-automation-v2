@@ -8,35 +8,23 @@
   hosts: brocade_cer_lab
   gather_facts: false
   tasks:
-    - name: "Import verify_access role"
-      ansible.builtin.import_role:
-        name: verify_access
-
-    - name: "Import verify_snmp role"
-      ansible.builtin.import_role:
-        name: verify_snmp
-
-    - name: "Import verify_ntp role"
-      ansible.builtin.import_role:
-        name: verify_ntp
+    - { import_role: { name: verify_access } }
+    - { import_role: { name: verify_snmp } }
+    - { import_role: { name: verify_ntp } }
 
     - name: "Append this device's results to the audit report"
       ansible.builtin.lineinfile:
         path: "/tmp/audit_report_{{ '%Y%m%d_%H%M%S' | strftime }}.csv"
         create: true
         line: "{{ inventory_hostname }},{{ item.check }},{{ item.status }},{{ item.detail | replace(',', ';') }}"
+        mode: '0644'
       loop:
-        - check: "SSH Access"
-          status: "{{ audit_access_status }}"
-          detail: "{{ audit_access_detail }}"
-        - check: "SNMP Functional"
-          status: "{{ audit_snmp_status }}"
-          detail: "{{ audit_snmp_detail }}"
-        - check: "NTP Configured"
-          status: "{{ audit_ntp_status }}"
-          detail: "{{ audit_ntp_detail }}"
+        - { check: "SSH Access", status: "{{ audit_access_status }}", detail: "{{ audit_access_detail }}" }
+        - { check: "SNMP Functional", status: "{{ audit_snmp_status }}", detail: "{{ audit_snmp_detail }}" }
+        - { check: "NTP Configured", status: "{{ audit_ntp_status }}", detail: "{{ audit_ntp_detail }}" }
       delegate_to: localhost
 
     - name: "Show this device's results"
       ansible.builtin.debug:
         msg: "{{ inventory_hostname }}: SSH={{ audit_access_status }} | SNMP={{ audit_snmp_status }} | NTP={{ audit_ntp_status }}"
+

@@ -6,13 +6,16 @@ rules:
   document-start: disable
   truthy: disable
   comments-indentation: disable
-  comments: disable
+#  comments: disable
   empty-lines: disable
   trailing-spaces: disable
   new-line-at-end-of-file: disable
   new-lines: disable
   indentation:
     indent-sequences: whatever
+  comments: { min-spaces-from-content: 1 }
+  braces: { max-spaces-inside: 1 }
+  octal-values: { forbid-implicit-octal: true, forbid-explicit-octal: true }
 ignore: |
   inventory/**/vault.yml
   inventory/**/vault/**
