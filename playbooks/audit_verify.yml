@@ -1,8 +1,11 @@
 ---
-# Functional hardening verification — proves features actually WORK,
-# not just that config lines exist. Produces a CSV audit record per run.
-# Scope: brocade_cer_lab only for now — extend to other groups once
-# their verify_*/tasks/<device_series>.yml files exist.
+# ============================================================
+# Functional hardening verification
+# Proves features actually WORK, not just that config lines exist.
+# Produces a timestamped CSV audit report at /tmp/audit_report_*.csv
+# Scope: brocade_cer_lab — extend to other groups once their
+# verify_*/tasks/<device_series>.yml files exist.
+# ============================================================
 
 - name: "Audit Verification — Brocade CER"
   hosts: brocade_cer_lab
@@ -20,9 +23,25 @@
       ansible.builtin.import_role:
         name: verify_ntp
 
+    - name: "Set audit report path (shared across all hosts in play)"
+      ansible.builtin.set_fact:
+        audit_report_path: "/tmp/audit_report_{{ lookup('pipe', 'date +%Y%m%d_%H%M%S') }}.csv"
+      run_once: true
+      delegate_to: localhost
+
+    - name: "Write CSV header (once per report)"
+      ansible.builtin.lineinfile:
+        path: "{{ audit_report_path }}"
+        create: true
+        insertbefore: BOF
+        line: "Host,Check,Status,Detail"
+        mode: '0644'
+      run_once: true
+      delegate_to: localhost
+
     - name: "Append this device's results to the audit report"
       ansible.builtin.lineinfile:
-        path: "/tmp/audit_report_{{ '%Y%m%d_%H%M%S' | strftime }}.csv"
+        path: "{{ audit_report_path }}"
         create: true
         line: "{{ inventory_hostname }},{{ item.check }},{{ item.status }},{{ item.detail | replace(',', ';') }}"
         mode: '0644'
@@ -40,5 +59,12 @@
 
     - name: "Show this device's results"
       ansible.builtin.debug:
-        msg: "{{ inventory_hostname }}: SSH={{ verify_access_status }} | SNMP={{ verify_snmp_status }} | NTP={{ verify_ntp_status }}"
+        msg:
+          - "=============================="
+          - "Host   : {{ inventory_hostname }}"
+          - "SSH    : {{ verify_access_status }} — {{ verify_access_detail }}"
+          - "SNMP   : {{ verify_snmp_status }} — {{ verify_snmp_detail }}"
+          - "NTP    : {{ verify_ntp_status }} — {{ verify_ntp_detail }}"
+          - "Report : {{ audit_report_path }}"
+          - "=============================="
 

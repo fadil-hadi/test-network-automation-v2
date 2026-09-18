@@ -1,4 +1,10 @@
 ---
+# ============================================================
+# verify_snmp: Brocade IronWare CER
+# Checks SNMP is active by SSHing in and running show snmp.
+# Extracts the "X received, Y sent" summary line as clean detail.
+# ============================================================
+
 - name: "[Brocade CER] Functional SNMP check via SSH — query sysName OID"
   ansible.builtin.expect:
     command: >-
@@ -17,8 +23,19 @@
   register: verify_snmp_result
   ignore_errors: true
 
+- name: "Extract clean SNMP summary line from output"
+  ansible.builtin.set_fact:
+    verify_snmp_summary: >-
+      {{
+        verify_snmp_result.stdout_lines
+        | select('match', '.*received.*sent.*')
+        | list
+        | first
+        | default('SNMP output not found')
+        | trim
+      }}
+
 - name: "Record SNMP check result"
   ansible.builtin.set_fact:
     verify_snmp_status: "{{ 'PASS' if verify_snmp_result.rc == 0 else 'FAIL' }}"
-    verify_snmp_detail: "{{ verify_snmp_result.stdout | default('no output captured') }}"
-
+    verify_snmp_detail: "{{ verify_snmp_summary }}"

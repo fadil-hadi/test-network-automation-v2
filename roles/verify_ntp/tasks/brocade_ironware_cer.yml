@@ -1,4 +1,11 @@
 ---
+# ============================================================
+# verify_ntp: Brocade IronWare CER
+# SSHs in and runs show ntp. Searches all output lines for
+# ntp_primary IP — avoids stdout_lines[0] which captures the
+# SSH banner/warning rather than actual command output.
+# ============================================================
+
 - name: "[Brocade CER] Verify NTP servers configured"
   ansible.builtin.expect:
     command: "ssh {{ legacy_ssh_crypto_args }} {{ ansible_user }}@{{ ansible_host }}"
@@ -6,15 +13,34 @@
       "[Pp]assword:\\s*$":
         - "{{ ansible_password }}"
       "[>#]\\s*$":
+        - "enable"
         - "show ntp"
+        - "exit"
         - "exit"
     timeout: 20
   delegate_to: localhost
   changed_when: false
   register: verify_ntp_result
 
+- name: "Extract NTP server lines from output"
+  ansible.builtin.set_fact:
+    verify_ntp_server_lines: >-
+      {{
+        verify_ntp_result.stdout_lines
+        | select('match', '.*' + ntp_primary + '.*')
+        | list
+        | first
+        | default('')
+        | trim
+      }}
+
 - name: "Record NTP check result"
   ansible.builtin.set_fact:
-    verify_ntp_status: "{{ 'PASS' if (ntp_primary in verify_ntp_result.stdout_lines[0]) else 'NEEDS REVIEW' }}"
-    verify_ntp_detail: "{{ verify_ntp_result.stdout_lines[0] | default('no output captured') }}"
+    verify_ntp_status: "{{ 'PASS' if verify_ntp_server_lines != '' else 'FAIL' }}"
+    verify_ntp_detail: >-
+      {{
+        'Primary NTP ' + ntp_primary + ' found: ' + verify_ntp_server_lines
+        if verify_ntp_server_lines != ''
+        else 'Primary NTP ' + ntp_primary + ' not found in show ntp output'
+      }}
 
